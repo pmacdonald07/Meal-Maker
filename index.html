@@ -10,29 +10,39 @@
 </head>
 
 <body>
-    <div class="box is-fluid">
-        <div class="field">
-            <label class="Meal">What kind of meal would you like?</label>
-            <div class="control">
-                <input class="input" type="text" placeholer="Text input">
-            </div>
-        </div>
-        <div class="field">
-            <label class="meal-time">When is this meal?</label>
-            <div class="control">
-                <div class="select">
-                    <select>
-                            <option>Breakfast</option>
-                            <option>Lunch</option>
-                            <option>Dinner</option>
-                            <option>Snack</option>
-                            <option>Teatime</option>
-                    </select>
+    <header>
+        Page Header
+    </header>
+    <main class="columns">
+        <div class="column is-one-third">
+            <div class="box is-fluid">
+                <div class="field">
+                    <label class="meal">What kind of meal would you like?</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Text input">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="meal-time">When is this meal?</label>
+                    <div class="control">
+                        <div class="select">
+                            <select>
+                                <option>Breakfast</option>
+                                <option>Lunch</option>
+                                <option>Dinner</option>
+                                <option>Snack</option>
+                                <option>Teatime</option>
+                            </select>
+                        </div>
+                        <button class="button submit">Submit</button>
+                    </div>
                 </div>
             </div>
         </div>
-
-    </form>
+        <div class="column is-two-thirds" id="cards">
+            <div class="box"></div>
+        </div>
+    </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./assets/js/script.js"></script>
 </body>
