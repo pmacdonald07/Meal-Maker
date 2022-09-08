@@ -1,3 +1,6 @@
+var patrickApiKey = "d4e89512419b4ecfae9d762561d78c97";
+var cardContainerEl = $("#cards");
+
 var getSpoonApi = function () {
   const options = {
     method: "GET",
@@ -7,7 +10,6 @@ var getSpoonApi = function () {
     },
   };
 
-  console.log("Hello World");
   var apiUrl =
     "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch";
 
@@ -16,6 +18,7 @@ var getSpoonApi = function () {
       if (response.ok) {
         response.json().then(function (data) {
           console.log(data);
+          displayRecipeCards(data);
         });
       } else {
         alert("Error: Data Not Found!");
@@ -26,71 +29,53 @@ var getSpoonApi = function () {
     });
 };
 
-var patrickApiKey = "d4e89512419b4ecfae9d762561d78c97";
-
-var displayRecipeCards = function (response) {
+// this function needs to have response from the API call as a parameter
+var displayRecipeCards = function (data) {
   // create row for forecast cards
-
-  // need to know container
-  weatherContainerEl.append(recipeCardEl);
+  recipeContainerEl = $("<div></div");
+  recipeContainerEl.attr("class", "columns");
+  cardContainerEl.append(recipeContainerEl);
 
   // for loop to create cards
   for (i = 0; i < 5; i++) {
     recipeCardEl = $("<div></div");
-    recipeCardEl.attr("class", "card");
+    recipeCardEl.attr("class", "card column");
+    recipeContainerEl.append(recipeCardEl);
 
     //set card image
     cardImg = $("<div></div");
     cardImg.attr("class", "card-image");
-    cardImg.html(
-      "<img src='https://bulma.io/images/placeholders/1280x960.png' alt='Placeholder image'></img>)"
-    );
     recipeCardEl.append(cardImg);
 
+    cardFigureEl = $("<figure></figure>");
+    cardFigureEl.attr("class", "image");
+    cardImg.append(cardFigureEl);
+
+    cardImgEl = $("<img></img>");
+    cardImgEl.attr("src", data.results[i].image);
+    cardImgEl.attr("alt", "Picture of recipe");
+    cardFigureEl.append(cardImgEl);
+
+    // set card body
+    cardBodyEl = $("<div></div");
+    cardBodyEl.attr("class", "card-content");
+    recipeCardEl.append(cardBodyEl);
+
     // set card title
-    cardTitle = $("<h4></h4>");
-    cardTitle.attr("class", "card-title");
-    cardTitle.text(moment().add(forecastCounter, "d").format("L"));
-    forecastCounter++;
-    cardBody.append(cardTitle);
+    cardTitleEl = $("<p></p>");
+    cardTitleEl.attr("class", "title is-4");
+    cardTitleEl.text(data.results[i].title);
+    cardBodyEl.append(cardTitleEl);
 
-    // set weather icon
-    futureIconSpanEl = $("<span></span>");
-    futureIconImgEl = $("<img></img");
-    futureIconImgEl.attr("class", "icon-img-sm card-text");
-    futureIconImgEl.attr(
-      "src",
-      "https://openweathermap.org/img/wn/" +
-        response.daily[i].weather[0].icon +
-        "@2x.png"
+    // set card content
+    cardContentEl = $("<p></p>");
+    cardContentEl.attr("class", "content");
+    cardContentEl.text(
+      "This is placeholder text for the description of a recipe!"
     );
-    futureIconSpanEl.append(futureIconImgEl);
-    cardBody.append(futureIconSpanEl);
-
-    // set card text
-    cardText = $("<p></p>");
-    cardText.attr("class", "card-text");
-    cardText.html(
-      "Temp: " +
-        response.daily[i].temp.day +
-        "&#8457" +
-        "<br>" +
-        "<br>" +
-        "Wind: " +
-        response.daily[i].wind_speed +
-        " MPH" +
-        "<br>" +
-        "<br>" +
-        "Humidity: " +
-        response.daily[i].humidity +
-        "%" +
-        "<br>"
-    );
-    cardBody.append(cardText);
-
-    // append cards
-    recipeCardEl.append(forecastCard);
+    cardBodyEl.append(cardContentEl);
+    cardContainerEl.append(recipeContainerEl);
   }
 };
 
-getSpoonApi();
+$("#form-submit").on("click", getSpoonApi);
