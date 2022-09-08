@@ -1,4 +1,8 @@
-var getSpoonApi = function () {
+var userInput = document.querySelector("#user-form");
+var submitButton = document.querySelector(".submit");
+
+var getSpoonApi = function (event) {
+  event.preventDefault();
   const options = {
     method: "GET",
     headers: {
@@ -7,11 +11,18 @@ var getSpoonApi = function () {
     },
   };
 
-  console.log("Hello World");
-  var apiUrl =
-    "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch";
+  var userText = document.querySelector(".input");
+  var input = userText.value.trim();
 
-  fetch(apiUrl, options)
+  console.log(input);
+  var apiKey = "c39f000be15b48f0b51fc4215771d97b";
+  var apiUrl =
+    "https://api.spoonacular.com/food/search?query=" +
+    input +
+    "&number=10&apiKey=" +
+    apiKey;
+
+  fetch(apiUrl)
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
@@ -26,4 +37,6 @@ var getSpoonApi = function () {
     });
 };
 
-getSpoonApi();
+userInput.addEventListener("submit", getSpoonApi);
+
+// getSpoonApi();
