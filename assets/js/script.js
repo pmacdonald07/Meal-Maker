@@ -78,10 +78,16 @@ var displayRecipeCards = function (data) {
     cardFigureEl.attr("class", "image");
     cardImg.append(cardFigureEl);
 
+    // Creates an anchor tag within the figure tag and gives it the href attribute with the recipe link and takes the user to it in a new tab
+    cardImgLinkEl = $("<a></a>");
+    cardImgLinkEl.attr("href", data.searchResults[0].results[i].link);
+    cardImgLinkEl.attr("target", "_blank");
+    cardFigureEl.append(cardImgLinkEl);
+
     cardImgEl = $("<img></img>");
     cardImgEl.attr("src", data.searchResults[0].results[i].image);
     cardImgEl.attr("alt", "Picture of recipe");
-    cardFigureEl.append(cardImgEl);
+    cardImgLinkEl.append(cardImgEl);
 
     // set card body
     cardBodyEl = $("<div></div");
