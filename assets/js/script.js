@@ -75,7 +75,7 @@ var displayRecipeCards = function (data) {
 
   // create row for forecast cards
   recipeContainerEl = $("<div></div");
-  recipeContainerEl.attr("class", "columns");
+  recipeContainerEl.attr("class", "columns drag");
   cardContainerEl.append(recipeContainerEl);
 
   function randomKey(arrApiKeys) {
@@ -152,6 +152,14 @@ var displayRecipeCards = function (data) {
 
     // console.log(data.searchResults[0].results[i].id);
   }
+
+  //drag recipe cards
+  var Draggable = function() {
+    $(".drag").sortable({connectWith:"#fav"})
+    $("#fav").sortable({connectWith:".drag", })
+  }
+  Draggable();
+
 };
 
 var getId = function (id) {
