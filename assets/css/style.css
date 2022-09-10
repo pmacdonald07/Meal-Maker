@@ -11,7 +11,9 @@ html {
 
 header {
 height: 100px;
-font-family: 'Barlow', sans-serif;
+font-family: 'Sacramento', cursive;
+color:crimson;
+text-align: center;
 font-size: 50px;
 justify-content: space-around;
 }
@@ -22,12 +24,16 @@ body {
 
 .fav-recipe-box {
     background-color: rgba(234, 255, 0, 0.5);
+    max-width: 400px;
+    text-align: center;
+    justify-content: center;
+    display: flex;
 }
 
 .fav-recipe-header {
     font-size: 32px;
     font-weight: bolder;
-    text-align: center;
+    justify-content: center;
 }
 
 .more-results-container {
@@ -107,5 +113,14 @@ body {
 .recipe-card {
     max-width: 300px;
     max-height: 500px;
-    margin-left: 2.25rem;
 }
+
+#welcome {
+    font-family: 'Sacramento', cursive;
+    color: red;
+    text-align: center;
+    font-size: 75px;
+    font-weight: bolder;
+    margin-top: 210px;
+}
+
