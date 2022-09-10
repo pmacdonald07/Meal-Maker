@@ -153,7 +153,7 @@ var displayRecipeCards = function (data) {
   //drag recipe cards
   var Draggable = function() {
     $(".drag").sortable({connectWith:"#fav"})
-    $("#fav").sortable({connectWith:".drag" })
+    $("#fav").sortable({connectWith:".drag", })
   }
   Draggable();
 
