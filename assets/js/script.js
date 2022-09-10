@@ -74,7 +74,7 @@ var displayRecipeCards = function (data) {
 
   // create row for forecast cards
   recipeContainerEl = $("<div></div");
-  recipeContainerEl.attr("class", "columns drag");
+  recipeContainerEl.attr("class", "columns drag is-full-mobile is-centered");
   cardContainerEl.append(recipeContainerEl);
 
   function randomKey(arrApiKeys) {
@@ -84,7 +84,10 @@ var displayRecipeCards = function (data) {
   // for loop to create cards
   for (i = 0; i < 5; i++) {
     recipeCardEl = $("<div></div");
-    recipeCardEl.attr("class", "card column recipe-card");
+    recipeCardEl.attr(
+      "class",
+      "card column recipe-card is-half-mobile mx-small"
+    );
     recipeCardEl.attr("id", data.searchResults[0].results[i].id);
     recipeContainerEl.append(recipeCardEl);
 
