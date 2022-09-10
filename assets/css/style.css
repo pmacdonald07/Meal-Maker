@@ -11,6 +11,7 @@ html {
 
 header {
 height: 100px;
+font-family: 'Barlow', sans-serif;
 font-size: 50px;
 justify-content: space-around;
 }
@@ -102,3 +103,7 @@ body {
 .checkbox {
     padding: 5px;
 }
+.columns {
+    gap: is-8;
+}
+
