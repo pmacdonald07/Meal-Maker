@@ -1,5 +1,6 @@
 var userInput = $("#user-form");
 var submitButton = $("#form-submit");
+let readyInMinutes = "";
 
 // An array of different apiKeys that will work in the fetch api call in the getSpoonApi function
 var arrApiKeys = [
@@ -145,50 +146,51 @@ var displayRecipeCards = function (data) {
     cardButtonIcon.attr("class", "fa-regular fa-star");
     cardFavoriteButton.append(cardButtonIcon);
 
-    console.log(data.searchResults[0].results[i].id);
-    // getId(data.searchResults[0].results[i].id);
+    getId(data.searchResults[0].results[i].id);
+
+    // console.log(data.searchResults[0].results[i].id);
   }
 };
 
-// PLEASE LEAVE COMMENTED OUT FUNCTION BELOW
+var getId = function (id) {
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "35f49090e6msha1612b0ea8a9d7fp14fe6djsn164414318e8d",
+      "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+    },
+  };
 
-// var getId = function (data) {
-//   const options = {
-//     method: "GET",
-//     headers: {
-//       "X-RapidAPI-Key": "35f49090e6msha1612b0ea8a9d7fp14fe6djsn164414318e8d",
-//       "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-//     },
-//   };
+  function randomKey(arrApiKeys) {
+    return arrApiKeys[Math.floor(Math.random() * arrApiKeys.length)];
+  }
 
-//   function randomKey(arrApiKeys) {
-//     return arrApiKeys[Math.floor(Math.random() * arrApiKeys.length)];
-//   }
+  var apiUrl =
+    "https://api.spoonacular.com/recipes/" +
+    id +
+    "/information?includeNutrition=false&apiKey=" +
+    randomKey(arrApiKeys);
 
-//   var apiUrl =
-//     "https://api.spoonacular.com/recipes/" +
-//     data +
-//     "/information?includeNutrition=false&apiKey=" +
-//     randomKey(arrApiKeys);
+  fetch(apiUrl)
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          console.log(data);
+          checkID(data);
+        });
+      } else {
+        alert("Error: Data Not Found!");
+      }
+    })
+    .catch(function (error) {
+      alert("Unable to connect to the Spoonacular Api");
+    });
+};
 
-//   fetch(apiUrl)
-//     .then(function (response) {
-//       if (response.ok) {
-//         response.json().then(function (data) {
-//           console.log(data);
-//           cardContentEl.text(data.readyInMinutes);
-//           return;
-//         });
-//       } else {
-//         alert("Error: Data Not Found!");
-//       }
-//     })
-//     .catch(function (error) {
-//       alert("Unable to connect to the Spoonacular Api");
-//     });
-// };
-
-// PLEASE LEAVE COMMENTED OUT FUNCTION ABOVE
+var updateCardText = function (idCallResponse) {
+  currentCard = $("cards").find($);
+  cardContentEl.text(idCallResponse.readyInMinutes);
+};
 
 // var favoriteRecipe = function () {
 //   console.log("Did it work?");
@@ -196,6 +198,28 @@ var displayRecipeCards = function (data) {
 
 var moreResults = function (event) {
   console.log(">>>>>>>", event);
+};
+
+var checkID = function (data) {
+  $(".recipe-card").each(function () {
+    console.log(data.id);
+    console.log($(this).attr("id"));
+    if (data.id == $(this).attr("id")) {
+      console.log("yes");
+      $(this)
+        .find("p")
+        .html(
+          "Ready in " +
+            data.readyInMinutes +
+            " min" +
+            "<br>" +
+            "Servings: " +
+            data.servings
+        );
+    } else {
+      console.log("no");
+    }
+  });
 };
 
 $("#form-submit").on("click", getSpoonApi);
