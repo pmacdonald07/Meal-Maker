@@ -149,8 +149,8 @@ var displayRecipeCards = function (data) {
 
   //drag recipe cards
   var Draggable = function() {
-    $(".drag").sortable({connectWith:".weekday"})
-    $(".weekday").sortable({connectWith: ".drag"});
+    $(".drag").sortable({connectWith:"#fav"})
+    $("#fav").sortable({connectWith:".drag" })
   }
   Draggable();
 
