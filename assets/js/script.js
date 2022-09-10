@@ -1,7 +1,5 @@
 var userInput = $("#user-form");
 var submitButton = $("#form-submit");
-let readyInMinutes = "";
-
 // An array of different apiKeys that will work in the fetch api call in the getSpoonApi function
 var arrApiKeys = [
   "2cb1ecb32f4e4eb9a46acc15da086c22",
@@ -55,7 +53,12 @@ var getSpoonApi = function (event) {
 
 // this function needs to have response from the API call as a parameter
 var displayRecipeCards = function (data) {
-  var boxContainerEl = $("#box");
+  $("#cards").text("");
+  var boxDisplayEl = $("<div></div");
+  boxDisplayEl.attr("class", "box more-results-container");
+  boxDisplayEl.attr("id", "box");
+  $("#cards").append(boxDisplayEl);
+
   var resultsTextHeader = $("<h1></h1>");
   resultsTextHeader.attr("class", "results-text-header");
   resultsTextHeader.text(
@@ -63,12 +66,12 @@ var displayRecipeCards = function (data) {
       data.query +
       '"'
   );
-  boxContainerEl.append(resultsTextHeader);
+  boxDisplayEl.append(resultsTextHeader);
 
   var moreResultsButton = $("<button></button>");
   moreResultsButton.attr("class", "more-results-button button");
   moreResultsButton.text("Display Different Recipes");
-  boxContainerEl.append(moreResultsButton);
+  boxDisplayEl.append(moreResultsButton);
 
   // create row for forecast cards
   recipeContainerEl = $("<div></div");
