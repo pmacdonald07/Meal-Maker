@@ -1,5 +1,18 @@
 * {
     box-sizing: border-box;
+    font-family: 'Barlow', sans-serif;
+    font-weight: bold;
+}
+html {
+    background-image:url(https://images.pexels.com/photos/616401/pexels-photo-616401.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+header {
+height: 100px;
+font-size: 50px;
+justify-content: space-around;
 }
 
 body {
@@ -81,4 +94,8 @@ body {
 .favorite:hover {
     background-color: rgb(0, 169, 203);
     color: yellow;
+}
+.box {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    opacity: 0.9;
 }
