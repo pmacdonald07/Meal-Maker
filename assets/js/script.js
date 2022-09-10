@@ -1,11 +1,7 @@
 var userInput = $("#user-form");
 var submitButton = $("#form-submit");
 // An array of different apiKeys that will work in the fetch api call in the getSpoonApi function
-var arrApiKeys = [
-  "2cb1ecb32f4e4eb9a46acc15da086c22",
-  "c39f000be15b48f0b51fc4215771d97b",
-  "abed78e3630b46feafb9672300be48cc",
-];
+var arrApiKeys = ["c39f000be15b48f0b51fc4215771d97b"];
 
 var cardContainerEl = $("#cards");
 
@@ -22,6 +18,8 @@ var getSpoonApi = function (event) {
   // Converts the user's input into a value the apiUrl will be able to read
   var userText = document.querySelector(".input");
   var input = userText.value.trim();
+
+  checkDrinks();
 
   // Chooses an apiKey at random from the arrApiKeys to be used in the fetch api call
   function randomKey(arrApiKeys) {
@@ -155,12 +153,11 @@ var displayRecipeCards = function (data) {
   }
 
   //drag recipe cards
-  var Draggable = function() {
-    $(".drag").sortable({connectWith:"#fav"})
-    $("#fav").sortable({connectWith:".drag", })
-  }
+  var Draggable = function () {
+    $(".drag").sortable({ connectWith: "#fav" });
+    $("#fav").sortable({ connectWith: ".drag" });
+  };
   Draggable();
-
 };
 
 var getId = function (id) {
@@ -186,7 +183,6 @@ var getId = function (id) {
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          console.log(data);
           checkID(data);
         });
       } else {
@@ -209,10 +205,7 @@ var moreResults = function (event) {
 
 var checkID = function (data) {
   $(".recipe-card").each(function () {
-    console.log(data.id);
-    console.log($(this).attr("id"));
     if (data.id == $(this).attr("id")) {
-      console.log("yes");
       $(this)
         .find("p")
         .html(
@@ -224,12 +217,37 @@ var checkID = function (data) {
             data.servings
         );
     } else {
-      console.log("no");
     }
   });
 };
 
-var checkDrinks = function () {};
+var displayDrinks = function () {
+  console.log("Drinks");
+
+  var apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
+
+  fetch(apiUrl)
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          console.log(data);
+        });
+      } else {
+        alert("Error: Data Not Found!");
+      }
+    })
+    .catch(function (error) {
+      alert("Unable to connect to the CocktailDB Api");
+    });
+};
+
+// Function checks if the drink checkbox is true
+var checkDrinks = function () {
+  console.log(">>>>>>>>>");
+
+  // If checkbox is true then run this function
+  displayDrinks();
+};
 
 $("#form-submit").on("click", getSpoonApi);
 
