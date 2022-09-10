@@ -103,10 +103,6 @@ body {
 .checkbox {
     padding: 5px;
 }
-.columns {
-    gap: is-8;
-}
-
 
 .recipe-card {
     max-width: 300px;
