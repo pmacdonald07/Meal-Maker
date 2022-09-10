@@ -55,7 +55,7 @@ var getSpoonApi = function (event) {
 var displayRecipeCards = function (data) {
   var boxContainerEl = $("#box");
   var resultsTextHeader = $("<h1></h1>");
-  resultsTextHeader = "Here are the top 5 recipes for:  '" + data.query + "' ";
+  resultsTextHeader = "Here are 5 recipes for:  '" + data.query + "' ";
   boxContainerEl.append(resultsTextHeader);
 
   // create row for forecast cards
@@ -70,7 +70,7 @@ var displayRecipeCards = function (data) {
   // for loop to create cards
   for (i = 0; i < 5; i++) {
     recipeCardEl = $("<div></div");
-    recipeCardEl.attr("class", "card column test");
+    recipeCardEl.attr("class", "card column recipe-card");
     recipeCardEl.attr("id", data.searchResults[0].results[i].id);
     recipeContainerEl.append(recipeCardEl);
 
@@ -94,16 +94,21 @@ var displayRecipeCards = function (data) {
     cardImgEl.attr("alt", "Picture of recipe");
     cardImgLinkEl.append(cardImgEl);
 
+    // set card title div
+    cardTitleEl = $("<div></div>");
+    cardTitleEl.attr("class", "card-title");
+    recipeCardEl.append(cardTitleEl);
+
+    // set card title
+    cardTitleText = $("<h1></h1>");
+    cardTitleText.attr("class", "recipe-title title is-4");
+    cardTitleText.text(data.searchResults[0].results[i].name);
+    cardTitleEl.append(cardTitleText);
+
     // set card body
     cardBodyEl = $("<div></div");
     cardBodyEl.attr("class", "card-content");
     recipeCardEl.append(cardBodyEl);
-
-    // set card title
-    cardTitleEl = $("<p></p>");
-    cardTitleEl.attr("class", "recipe-title title is-4");
-    cardTitleEl.text(data.searchResults[0].results[i].name);
-    cardBodyEl.append(cardTitleEl);
 
     // set card content
     cardContentEl = $("<p></p>");
@@ -113,14 +118,14 @@ var displayRecipeCards = function (data) {
     cardContainerEl.append(recipeContainerEl);
 
     // create another content section in the recipe card
-    cardButtonEl = $("<div></div>");
-    cardButtonEl.attr("class", "content");
-    cardBodyEl.append(cardButtonEl);
+    cardButtonEl = $("<footer></footer>");
+    cardButtonEl.attr("class", "card-footer");
+    recipeCardEl.append(cardButtonEl);
 
     // create the favorite button on each recipe card
     cardFavoriteButton = $("<button></button>");
-    cardFavoriteButton.attr("class", "favorite");
-    cardFavoriteButton.text("Favorite ");
+    cardFavoriteButton.attr("class", "favorite card-footer-item");
+    cardFavoriteButton.text("Favorite");
     cardButtonEl.append(cardFavoriteButton);
 
     cardButtonIcon = $("<i></i>");
