@@ -148,6 +148,8 @@ var displayRecipeCards = function (data) {
   }
 };
 
+// PLEASE LEAVE COMMENTED OUT FUNCTION BELOW
+
 // var getId = function (data) {
 //   const options = {
 //     method: "GET",
@@ -182,6 +184,8 @@ var displayRecipeCards = function (data) {
 //       alert("Unable to connect to the Spoonacular Api");
 //     });
 // };
+
+// PLEASE LEAVE COMMENTED OUT FUNCTION ABOVE
 
 var favoriteRecipe = function () {
   console.log("Did it work?");
