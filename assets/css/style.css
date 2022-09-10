@@ -83,7 +83,7 @@ body {
     /* Spaces the "Favorite" text and the star icon */
     justify-content: space-evenly;
     background-color: rgba(0, 169, 203, 0.8);
-    width: 100%;
+    max-width: 100%;
     padding: 10px 5px;
     font-size: 22px;
     font-weight: bold;
@@ -107,3 +107,9 @@ body {
     gap: is-8;
 }
 
+
+.recipe-card {
+    max-width: 300px;
+    max-height: 500px;
+    margin-left: 2.25rem;
+}
