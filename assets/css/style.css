@@ -1,3 +1,14 @@
 * {
     box-sizing: border-box;
 }
+
+.favorite {
+    background-color: rgba(0, 169, 203, 0.8);
+    width: 100%;
+    padding: 10px 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}

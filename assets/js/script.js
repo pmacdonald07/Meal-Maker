@@ -63,10 +63,15 @@ var displayRecipeCards = function (data) {
   recipeContainerEl.attr("class", "columns");
   cardContainerEl.append(recipeContainerEl);
 
+  function randomKey(arrApiKeys) {
+    return arrApiKeys[Math.floor(Math.random() * arrApiKeys.length)];
+  }
+
   // for loop to create cards
   for (i = 0; i < 5; i++) {
     recipeCardEl = $("<div></div");
-    recipeCardEl.attr("class", "card column");
+    recipeCardEl.attr("class", "card column test");
+    recipeCardEl.attr("id", data.searchResults[0].results[i].id);
     recipeContainerEl.append(recipeCardEl);
 
     //set card image
@@ -96,19 +101,70 @@ var displayRecipeCards = function (data) {
 
     // set card title
     cardTitleEl = $("<p></p>");
-    cardTitleEl.attr("class", "title is-4");
+    cardTitleEl.attr("class", "recipe-title title is-4");
     cardTitleEl.text(data.searchResults[0].results[i].name);
     cardBodyEl.append(cardTitleEl);
 
     // set card content
     cardContentEl = $("<p></p>");
     cardContentEl.attr("class", "content");
-    cardContentEl.text(
-      "This is placeholder text for the description of a recipe!"
-    );
+    cardContentEl.text(data.searchResults[0].results[i].name);
     cardBodyEl.append(cardContentEl);
     cardContainerEl.append(recipeContainerEl);
+
+    // create another content section in the recipe card
+    cardButtonEl = $("<div></div>");
+    cardButtonEl.attr("class", "content");
+    cardBodyEl.append(cardButtonEl);
+
+    // create the favorite button on each recipe card
+    cardFavoriteButton = $("<button></button>");
+    cardFavoriteButton.attr("class", "favorite");
+    cardFavoriteButton.text("Favorite ");
+    cardButtonEl.append(cardFavoriteButton);
+
+    cardButtonIcon = $("<i></i>");
+    cardButtonIcon.attr("class", "fa-regular fa-star");
+    cardFavoriteButton.append(cardButtonIcon);
+
+    console.log(data.searchResults[0].results[i].id);
+    // getId(data.searchResults[0].results[i].id);
   }
 };
+
+// var getId = function (data) {
+//   const options = {
+//     method: "GET",
+//     headers: {
+//       "X-RapidAPI-Key": "35f49090e6msha1612b0ea8a9d7fp14fe6djsn164414318e8d",
+//       "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+//     },
+//   };
+
+//   function randomKey(arrApiKeys) {
+//     return arrApiKeys[Math.floor(Math.random() * arrApiKeys.length)];
+//   }
+
+//   var apiUrl =
+//     "https://api.spoonacular.com/recipes/" +
+//     data +
+//     "/information?includeNutrition=false&apiKey=" +
+//     randomKey(arrApiKeys);
+
+//   fetch(apiUrl)
+//     .then(function (response) {
+//       if (response.ok) {
+//         response.json().then(function (data) {
+//           cardContentEl.text(data.readyInMinutes);
+//           return;
+//         });
+//       } else {
+//         alert("Error: Data Not Found!");
+//       }
+//     })
+//     .catch(function (error) {
+//       alert("Unable to connect to the Spoonacular Api");
+//     });
+// };
 
 $("#form-submit").on("click", getSpoonApi);
