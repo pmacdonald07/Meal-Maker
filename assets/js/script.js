@@ -85,7 +85,7 @@ var displayRecipeCards = function (data) {
   // for loop to create cards
   for (i = 0; i < 5; i++) {
     recipeCardEl = $("<div></div");
-    recipeCardEl.attr("class", "card column recipe-card");
+    recipeCardEl.attr("class", "card column recipe-card is-half-mobile");
     recipeCardEl.attr("id", data.searchResults[0].results[i].id);
     recipeContainerEl.append(recipeCardEl);
 
