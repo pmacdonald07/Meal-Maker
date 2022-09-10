@@ -55,18 +55,33 @@ var getSpoonApi = function (event) {
 var displayRecipeCards = function (data) {
   var boxContainerEl = $("#box");
   var resultsTextHeader = $("<h1></h1>");
-  resultsTextHeader = "Here are the top 5 recipes for:  '" + data.query + "' ";
+  resultsTextHeader.attr("class", "results-text-header");
+  resultsTextHeader.text(
+    'Here are some recipes we found based off of your search for:  "' +
+      data.query +
+      '"'
+  );
   boxContainerEl.append(resultsTextHeader);
+
+  var moreResultsButton = $("<button></button>");
+  moreResultsButton.attr("class", "more-results-button button");
+  moreResultsButton.text("Display Different Recipes");
+  boxContainerEl.append(moreResultsButton);
 
   // create row for forecast cards
   recipeContainerEl = $("<div></div");
   recipeContainerEl.attr("class", "columns");
   cardContainerEl.append(recipeContainerEl);
 
+  function randomKey(arrApiKeys) {
+    return arrApiKeys[Math.floor(Math.random() * arrApiKeys.length)];
+  }
+
   // for loop to create cards
   for (i = 0; i < 5; i++) {
     recipeCardEl = $("<div></div");
-    recipeCardEl.attr("class", "card column");
+    recipeCardEl.attr("class", "card column recipe-card");
+    recipeCardEl.attr("id", data.searchResults[0].results[i].id);
     recipeContainerEl.append(recipeCardEl);
 
     //set card image
@@ -78,31 +93,102 @@ var displayRecipeCards = function (data) {
     cardFigureEl.attr("class", "image");
     cardImg.append(cardFigureEl);
 
+    // Creates an anchor tag within the figure tag and gives it the href attribute with the recipe link and takes the user to it in a new tab
+    cardImgLinkEl = $("<a></a>");
+    cardImgLinkEl.attr("href", data.searchResults[0].results[i].link);
+    cardImgLinkEl.attr("target", "_blank");
+    cardFigureEl.append(cardImgLinkEl);
+
     cardImgEl = $("<img></img>");
     cardImgEl.attr("src", data.searchResults[0].results[i].image);
     cardImgEl.attr("alt", "Picture of recipe");
-    cardFigureEl.append(cardImgEl);
+    cardImgLinkEl.append(cardImgEl);
+
+    // set card title div
+    cardTitleEl = $("<div></div>");
+    cardTitleEl.attr("class", "card-title");
+    recipeCardEl.append(cardTitleEl);
+
+    // set card title
+    cardTitleText = $("<h1></h1>");
+    cardTitleText.attr("class", "recipe-title title is-4");
+    cardTitleText.text(data.searchResults[0].results[i].name);
+    cardTitleEl.append(cardTitleText);
 
     // set card body
     cardBodyEl = $("<div></div");
     cardBodyEl.attr("class", "card-content");
     recipeCardEl.append(cardBodyEl);
 
-    // set card title
-    cardTitleEl = $("<p></p>");
-    cardTitleEl.attr("class", "title is-4");
-    cardTitleEl.text(data.searchResults[0].results[i].name);
-    cardBodyEl.append(cardTitleEl);
-
     // set card content
     cardContentEl = $("<p></p>");
     cardContentEl.attr("class", "content");
-    cardContentEl.text(
-      "This is placeholder text for the description of a recipe!"
-    );
+    cardContentEl.text(data.searchResults[0].results[i].name);
     cardBodyEl.append(cardContentEl);
     cardContainerEl.append(recipeContainerEl);
+
+    // create another content section in the recipe card
+    cardButtonEl = $("<footer></footer>");
+    cardButtonEl.attr("class", "card-footer");
+    recipeCardEl.append(cardButtonEl);
+
+    // create the favorite button on each recipe card
+    cardFavoriteButton = $("<button></button>");
+    cardFavoriteButton.attr("class", "favorite card-footer-item button");
+    cardFavoriteButton.attr("id", "favorite");
+    cardFavoriteButton.text("Favorite");
+    cardButtonEl.append(cardFavoriteButton);
+
+    cardButtonIcon = $("<i></i>");
+    cardButtonIcon.attr("class", "fa-regular fa-star");
+    cardFavoriteButton.append(cardButtonIcon);
+
+    console.log(data.searchResults[0].results[i].id);
+    // getId(data.searchResults[0].results[i].id);
   }
+};
+
+// PLEASE LEAVE COMMENTED OUT FUNCTION BELOW
+
+// var getId = function (data) {
+//   const options = {
+//     method: "GET",
+//     headers: {
+//       "X-RapidAPI-Key": "35f49090e6msha1612b0ea8a9d7fp14fe6djsn164414318e8d",
+//       "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+//     },
+//   };
+
+//   function randomKey(arrApiKeys) {
+//     return arrApiKeys[Math.floor(Math.random() * arrApiKeys.length)];
+//   }
+
+//   var apiUrl =
+//     "https://api.spoonacular.com/recipes/" +
+//     data +
+//     "/information?includeNutrition=false&apiKey=" +
+//     randomKey(arrApiKeys);
+
+//   fetch(apiUrl)
+//     .then(function (response) {
+//       if (response.ok) {
+//         response.json().then(function (data) {
+//           cardContentEl.text(data.readyInMinutes);
+//           return;
+//         });
+//       } else {
+//         alert("Error: Data Not Found!");
+//       }
+//     })
+//     .catch(function (error) {
+//       alert("Unable to connect to the Spoonacular Api");
+//     });
+// };
+
+// PLEASE LEAVE COMMENTED OUT FUNCTION ABOVE
+
+var favoriteRecipe = function () {
+  console.log("Did it work?");
 };
 
 $("#form-submit").on("click", getSpoonApi);
