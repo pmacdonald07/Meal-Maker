@@ -3,7 +3,6 @@ var submitButton = $("#form-submit");
 // An array of different apiKeys that will work in the fetch api call in the getSpoonApi function
 var arrApiKeys = [
   "c39f000be15b48f0b51fc4215771d97b",
-  "fe6c2d84686842f9af715566ad95611d",
 ];
 
 var cardContainerEl = $("#cards");
@@ -74,7 +73,7 @@ var displayRecipeCards = function (data) {
 
   // create row for forecast cards
   recipeContainerEl = $("<div></div");
-  recipeContainerEl.attr("class", "columns drag");
+  recipeContainerEl.attr("class", "columns drag is-full-mobile is-centered");
   cardContainerEl.append(recipeContainerEl);
 
   function randomKey(arrApiKeys) {
@@ -84,7 +83,10 @@ var displayRecipeCards = function (data) {
   // for loop to create cards
   for (i = 0; i < 5; i++) {
     recipeCardEl = $("<div></div");
-    recipeCardEl.attr("class", "card column recipe-card");
+    recipeCardEl.attr(
+      "class",
+      "card column recipe-card is-half-mobile mx-small"
+    );
     recipeCardEl.attr("id", data.searchResults[0].results[i].id);
     recipeContainerEl.append(recipeCardEl);
 
@@ -153,12 +155,11 @@ var displayRecipeCards = function (data) {
   }
 
   //drag recipe cards
-  var Draggable = function() {
-    $(".drag").sortable({connectWith:"#fav"})
-    $("#fav").sortable({connectWith:".drag", })
-  }
+  var Draggable = function () {
+    $(".drag").sortable({ connectWith: "#fav" });
+    $("#fav").sortable({ connectWith: ".drag" });
+  };
   Draggable();
-
 };
 
 var getId = function (id) {
