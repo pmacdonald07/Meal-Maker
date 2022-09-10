@@ -3,8 +3,9 @@ var submitButton = $("#form-submit");
 
 // An array of different apiKeys that will work in the fetch api call in the getSpoonApi function
 var arrApiKeys = [
-  "d4e89512419b4ecfae9d762561d78c97",
+  "2cb1ecb32f4e4eb9a46acc15da086c22",
   "c39f000be15b48f0b51fc4215771d97b",
+  "abed78e3630b46feafb9672300be48cc",
 ];
 
 var cardContainerEl = $("#cards");
@@ -65,6 +66,7 @@ var displayRecipeCards = function (data) {
 
   var moreResultsButton = $("<button></button>");
   moreResultsButton.attr("class", "more-results-button button");
+  moreResultsButton.attr("id", "more-results");
   moreResultsButton.text("Display Different Recipes");
   boxContainerEl.append(moreResultsButton);
 
@@ -173,6 +175,7 @@ var displayRecipeCards = function (data) {
 //     .then(function (response) {
 //       if (response.ok) {
 //         response.json().then(function (data) {
+//           console.log(data);
 //           cardContentEl.text(data.readyInMinutes);
 //           return;
 //         });
@@ -187,8 +190,14 @@ var displayRecipeCards = function (data) {
 
 // PLEASE LEAVE COMMENTED OUT FUNCTION ABOVE
 
-var favoriteRecipe = function () {
-  console.log("Did it work?");
+// var favoriteRecipe = function () {
+//   console.log("Did it work?");
+// };
+
+var moreResults = function (event) {
+  console.log(">>>>>>>", event);
 };
 
 $("#form-submit").on("click", getSpoonApi);
+
+$("#more-results").on("click", moreResults);
