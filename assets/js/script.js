@@ -192,10 +192,6 @@ var updateCardText = function (idCallResponse) {
   cardContentEl.text(idCallResponse.readyInMinutes);
 };
 
-// var favoriteRecipe = function () {
-//   console.log("Did it work?");
-// };
-
 var moreResults = function (event) {
   console.log(">>>>>>>", event);
 };
@@ -221,6 +217,8 @@ var checkID = function (data) {
     }
   });
 };
+
+var checkDrinks = function () {};
 
 $("#form-submit").on("click", getSpoonApi);
 
