@@ -55,8 +55,18 @@ var getSpoonApi = function (event) {
 var displayRecipeCards = function (data) {
   var boxContainerEl = $("#box");
   var resultsTextHeader = $("<h1></h1>");
-  resultsTextHeader = "Here are 5 recipes for:  '" + data.query + "' ";
+  resultsTextHeader.attr("class", "results-text-header");
+  resultsTextHeader.text(
+    'Here are some recipes we found based off of your search for:  "' +
+      data.query +
+      '"'
+  );
   boxContainerEl.append(resultsTextHeader);
+
+  var moreResultsButton = $("<button></button>");
+  moreResultsButton.attr("class", "more-results-button button");
+  moreResultsButton.text("Display Different Recipes");
+  boxContainerEl.append(moreResultsButton);
 
   // create row for forecast cards
   recipeContainerEl = $("<div></div");
@@ -124,7 +134,8 @@ var displayRecipeCards = function (data) {
 
     // create the favorite button on each recipe card
     cardFavoriteButton = $("<button></button>");
-    cardFavoriteButton.attr("class", "favorite card-footer-item");
+    cardFavoriteButton.attr("class", "favorite card-footer-item button");
+    cardFavoriteButton.attr("id", "favorite");
     cardFavoriteButton.text("Favorite");
     cardButtonEl.append(cardFavoriteButton);
 
@@ -171,5 +182,9 @@ var displayRecipeCards = function (data) {
 //       alert("Unable to connect to the Spoonacular Api");
 //     });
 // };
+
+var favoriteRecipe = function () {
+  console.log("Did it work?");
+};
 
 $("#form-submit").on("click", getSpoonApi);
