@@ -1,12 +1,7 @@
 var userInput = $("#user-form");
 var submitButton = $("#form-submit");
 // An array of different apiKeys that will work in the fetch api call in the getSpoonApi function
-var arrApiKeys = [
-  "c39f000be15b48f0b51fc4215771d97b",
-  "d4e89512419b4ecfae9d762561d78c97",
-  "2cb1ecb32f4e4eb9a46acc15da086c22",
-  "abed78e3630b46feafb9672300be48cc",
-];
+var arrApiKeys = ["c39f000be15b48f0b51fc4215771d97b"];
 
 var cardContainerEl = $("#cards");
 
@@ -29,52 +24,44 @@ var getSpoonApi = function (event) {
     return arrApiKeys[Math.floor(Math.random() * arrApiKeys.length)];
   }
   console.log(document.getElementById("veggie-option").checked);
+  var dietParameter = "&diet=";
 
   if (document.getElementById("veggie-option").checked === true) {
     console.log(input);
-    var apiUrl =
-      "https://api.spoonacular.com/recipes/complexSearch?query=" +
-      input +
-      "&number=5&diet=vegetarian&addRecipeInformation=true&apiKey=" +
-      randomKey(arrApiKeys);
-
-    fetch(apiUrl)
-      .then(function (response) {
-        if (response.ok) {
-          response.json().then(function (data) {
-            console.log(data);
-            displayRecipeCards(data);
-          });
-        } else {
-          alert("Error: Data Not Found!");
-        }
-      })
-      .catch(function (error) {
-        alert("Unable to connect to the Spoonacular Api");
-      });
-  } else {
-    console.log(input);
-    var apiUrl =
-      "https://api.spoonacular.com/recipes/complexSearch?query=" +
-      input +
-      "&number=5&addRecipeInformation=true&apiKey=" +
-      randomKey(arrApiKeys);
-
-    fetch(apiUrl)
-      .then(function (response) {
-        if (response.ok) {
-          response.json().then(function (data) {
-            console.log(data);
-            displayRecipeCards(data);
-          });
-        } else {
-          alert("Error: Data Not Found!");
-        }
-      })
-      .catch(function (error) {
-        alert("Unable to connect to the Spoonacular Api");
-      });
+    dietParameter = dietParameter + "vegetarian";
   }
+
+  if (document.getElementById("vegan-option").checked === true) {
+    dietParameter = dietParameter + "vegan";
+  }
+
+  if (document.getElementById("gluten-free-option").checked === true) {
+    dietParameter = dietParameter + "gluten free";
+  }
+
+  var apiUrl =
+    "https://api.spoonacular.com/recipes/complexSearch?query=" +
+    input +
+    "&number=5&addRecipeInformation=true" +
+    dietParameter +
+    "&apiKey=" +
+    randomKey(arrApiKeys);
+
+  fetch(apiUrl)
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          console.log(data);
+          console.log(apiUrl);
+          displayRecipeCards(data);
+        });
+      } else {
+        alert("Error: Data Not Found!");
+      }
+    })
+    .catch(function (error) {
+      alert("Unable to connect to the Spoonacular Api");
+    });
 };
 
 // this function needs to have response from the API call as a parameter
