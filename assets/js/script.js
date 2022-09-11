@@ -1,15 +1,21 @@
 var userInput = $("#user-form");
 var submitButton = $("#form-submit");
 // An array of different apiKeys that will work in the fetch api call in the getSpoonApi function
-var arrApiKeys = ["c39f000be15b48f0b51fc4215771d97b"];
+var arrApiKeys = [
+  "c39f000be15b48f0b51fc4215771d97b",
+  "ad6278e15c864117bf13998d6f2409e0",
+  "d47220e0ade34b3ea9c039613858c695",
+];
 
 // All Api Keys
 // var arrApiKeys = [
 //   "c39f000be15b48f0b51fc4215771d97b",
+//   "ad6278e15c864117bf13998d6f2409e0",
 //   "d4e89512419b4ecfae9d762561d78c97",
 //   "2cb1ecb32f4e4eb9a46acc15da086c22",
 //   "abed78e3630b46feafb9672300be48cc",
 //   "fe6c2d84686842f9af715566ad95611d",
+//   "d47220e0ade34b3ea9c039613858c695"
 // ];
 
 var cardContainerEl = $("#cards");
@@ -323,6 +329,8 @@ var displayDrinks = function (data) {
   cardTitleEl.append(cardTitleText);
 
   var ingredientsEl = $("#ingredients");
+  ingredientsEl.attr("class", "column");
+  drinkContainerEl.append(ingredientsEl);
 
   // Set Ingredients Column
   ingredientsTitleEl = $("<div></div>");
@@ -338,95 +346,132 @@ var displayDrinks = function (data) {
   ingredientsListOrdered = $("<ol></ol>");
   ingredientsListEl.append(ingredientsListOrdered);
 
-  // if (data.strIngredient1 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient1 + " " + data.strMeasure1);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  if (data.drinks[0].strIngredient1 !== null) {
+    console.log("NOT NULL");
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(
+      " " +
+        data.drinks[0].strIngredient1 +
+        " " +
+        data.drinks[0].strMeasure1 +
+        " "
+    );
+    ingredientsListOrdered.append(ingredientSingle);
+  } else {
+    console.log("IT IS NULL");
+  }
 
-  // if (data.strIngredient2 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient2 + " " + data.strMeasure2);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  if (data.drinks[0].strIngredient2 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(
+      data.drinks[0].strIngredient2 + " " + data.drinks[0].strMeasure2
+    );
+    ingredientsListOrdered.append(ingredientSingle);
+  }
 
-  // if (data.strIngredient3 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient3 + " " + data.strMeasure3);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  if (data.drinks[0].strIngredient3 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(
+      data.drinks[0].strIngredient3 + " " + data.drinks[0].strMeasure3
+    );
+    ingredientsListOrdered.append(ingredientSingle);
+  }
 
-  // if (data.strIngredient4 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient4 + " " + data.strMeasure4);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  if (data.drinks[0].strIngredient4 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(
+      data.drinks[0].strIngredient4 + " " + data.drinks[0].strMeasure4
+    );
+    ingredientsListOrdered.append(ingredientSingle);
+  }
 
-  // if (data.strIngredient5 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient5 + " " + data.strMeasure5);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  if (data.drinks[0].strIngredient5 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(
+      data.drinks[0].strIngredient5 + " " + data.drinks[0].strMeasure5
+    );
+    ingredientsListOrdered.append(ingredientSingle);
+  }
 
-  // if (data.strIngredient6 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient6 + " " + data.strMeasure6);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  if (data.drinks[0].strIngredient6 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(
+      data.drinks[0].strIngredient6 + " " + data.drinks[0].strMeasure6
+    );
+    ingredientsListOrdered.append(ingredientSingle);
+  }
 
-  // if (data.strIngredient6 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient7 + " " + data.strMeasure7);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  if (data.drinks[0].strIngredient6 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(
+      data.drinks[0].strIngredient7 + " " + data.drinks[0].strMeasure7
+    );
+    ingredientsListOrdered.append(ingredientSingle);
+  }
 
-  // if (data.strIngredient8 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient8 + " " + data.strMeasure8);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  if (data.drinks[0].strIngredient8 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(
+      data.drinks[0].strIngredient8 + " " + data.drinks[0].strMeasure8
+    );
+    ingredientsListOrdered.append(ingredientSingle);
+  }
 
-  // if (data.strIngredient9 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient9 + " " + data.strMeasure9);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  if (data.drinks[0].strIngredient9 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(
+      data.drinks[0].strIngredient9 + " " + data.drinks[0].strMeasure9
+    );
+    ingredientsListOrdered.append(ingredientSingle);
+  }
 
-  // if (data.strIngredient10 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient10 + " " + data.strMeasure10);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  if (data.drinks[0].strIngredient10 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(
+      data.drinks[0].strIngredient10 + " " + data.drinks[0].strMeasure10
+    );
+    ingredientsListOrdered.append(ingredientSingle);
+  }
 
-  // if (data.strIngredient11 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient11 + " " + data.strMeasure11);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  if (data.drinks[0].strIngredient11 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(
+      data.drinks[0].strIngredient11 + " " + data.drinks[0].strMeasure11
+    );
+    ingredientsListOrdered.append(ingredientSingle);
+  }
 
-  // if (data.strIngredient12 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient12 + " " + data.strMeasure12);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  if (data.drinks[0].strIngredient12 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(
+      data.drinks[0].strIngredient12 + " " + data.drinks[0].strMeasure12
+    );
+    ingredientsListOrdered.append(ingredientSingle);
+  }
 
-  // if (data.strIngredient13 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient13 + " " + data.strMeasure13);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  if (data.drinks[0].strIngredient13 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(
+      data.drinks[0].strIngredient13 + " " + data.drinks[0].strMeasure13
+    );
+    ingredientsListOrdered.append(ingredientSingle);
+  }
 
-  // if (data.strIngredient14 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient14 + " " + data.strMeasure14);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  if (data.drinks[0].strIngredient14 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(
+      data.drinks[0].strIngredient14 + " " + data.drinks[0].strMeasure14
+    );
+    ingredientsListOrdered.append(ingredientSingle);
+  }
 
-  // if (data.strIngredient15 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient15 + " " + data.strMeasure15);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  if (data.drinks[0].strIngredient15 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(
+      data.drinks[0].strIngredient15 + " " + data.drinks[0].strMeasure15
+    );
+    ingredientsListOrdered.append(ingredientSingle);
+  }
 };
 
 $("#form-submit").on("click", getSpoonApi);
