@@ -293,13 +293,8 @@ var displayDrinks = function (data) {
   console.log("DRINKS", data);
 
   $("#drink").text("");
-  drinkContainerEl.attr("class", "box drink-column");
+  drinkContainerEl.attr("class", "box drink-column columns");
   cardContainerEl.append(drinkContainerEl);
-
-  // // create row for drink card
-  // recipeContainerEl = $("<div></div");
-  // // recipeContainerEl.attr("class", "columns drag is-full-mobile is-centered");
-  // drinkContainerEl.append(recipeContainerEl);
 
   recipeCardEl = $("<div></div");
   recipeCardEl.attr(
@@ -333,17 +328,111 @@ var displayDrinks = function (data) {
   cardTitleText.text(data.drinks[0].strDrink);
   cardTitleEl.append(cardTitleText);
 
-  // set card body
-  cardBodyEl = $("<div></div");
-  cardBodyEl.attr("class", "card-content");
-  recipeCardEl.append(cardBodyEl);
+  var ingredientsEl = $("#ingredients");
 
-  // set card content
-  cardContentEl = $("<p></p>");
-  cardContentEl.attr("class", "content");
-  // cardContentEl.text(data.searchResults[0].results[i].name);
-  cardBodyEl.append(cardContentEl);
-  cardContainerEl.append(recipeContainerEl);
+  // Set Ingredients Column
+  ingredientsTitleEl = $("<div></div>");
+  ingredientsEl.append(ingredientsTitleEl);
+
+  ingredientsTitleText = $("<h1></h1>");
+  ingredientsTitleText.attr("class", "ingredients-title");
+  ingredientsTitleEl.append(ingredientsTitleText);
+
+  ingredientsListEl = $("<div></div>");
+  ingredientsEl.append(ingredientsListEl);
+
+  ingredientsListOrdered = $("<ol></ol>");
+  ingredientsListEl.append(ingredientsListOrdered);
+
+  if (data.strIngredient1 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(data.strIngredient1 + " " + data.strMeasure1);
+    ingredientsListEl.append(ingredientSingle);
+  }
+
+  if (data.strIngredient2 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(data.strIngredient2 + " " + data.strMeasure2);
+    ingredientsListEl.append(ingredientSingle);
+  }
+
+  if (data.strIngredient3 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(data.strIngredient3 + " " + data.strMeasure3);
+    ingredientsListEl.append(ingredientSingle);
+  }
+
+  if (data.strIngredient4 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(data.strIngredient4 + " " + data.strMeasure4);
+    ingredientsListEl.append(ingredientSingle);
+  }
+
+  if (data.strIngredient5 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(data.strIngredient5 + " " + data.strMeasure5);
+    ingredientsListEl.append(ingredientSingle);
+  }
+
+  if (data.strIngredient6 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(data.strIngredient6 + " " + data.strMeasure6);
+    ingredientsListEl.append(ingredientSingle);
+  }
+
+  if (data.strIngredient6 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(data.strIngredient7 + " " + data.strMeasure7);
+    ingredientsListEl.append(ingredientSingle);
+  }
+
+  if (data.strIngredient8 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(data.strIngredient8 + " " + data.strMeasure8);
+    ingredientsListEl.append(ingredientSingle);
+  }
+
+  if (data.strIngredient9 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(data.strIngredient9 + " " + data.strMeasure9);
+    ingredientsListEl.append(ingredientSingle);
+  }
+
+  if (data.strIngredient10 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(data.strIngredient10 + " " + data.strMeasure10);
+    ingredientsListEl.append(ingredientSingle);
+  }
+
+  if (data.strIngredient11 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(data.strIngredient11 + " " + data.strMeasure11);
+    ingredientsListEl.append(ingredientSingle);
+  }
+
+  if (data.strIngredient12 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(data.strIngredient12 + " " + data.strMeasure12);
+    ingredientsListEl.append(ingredientSingle);
+  }
+
+  if (data.strIngredient13 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(data.strIngredient13 + " " + data.strMeasure13);
+    ingredientsListEl.append(ingredientSingle);
+  }
+
+  if (data.strIngredient14 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(data.strIngredient14 + " " + data.strMeasure14);
+    ingredientsListEl.append(ingredientSingle);
+  }
+
+  if (data.strIngredient15 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.text(data.strIngredient15 + " " + data.strMeasure15);
+    ingredientsListEl.append(ingredientSingle);
+  }
 };
 
 $("#form-submit").on("click", getSpoonApi);
