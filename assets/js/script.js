@@ -33,53 +33,45 @@ var getSpoonApi = function (event) {
   function randomKey(arrApiKeys) {
     return arrApiKeys[Math.floor(Math.random() * arrApiKeys.length)];
   }
-  console.log(document.getElementById("veggie-option").checked);
+
+  var dietParameter = "&diet=";
 
   if (document.getElementById("veggie-option").checked === true) {
     console.log(input);
-    var apiUrl =
-      "https://api.spoonacular.com/recipes/complexSearch?query=" +
-      input +
-      "&number=5&diet=vegetarian&addRecipeInformation=true&apiKey=" +
-      randomKey(arrApiKeys);
-
-    fetch(apiUrl)
-      .then(function (response) {
-        if (response.ok) {
-          response.json().then(function (data) {
-            console.log(data);
-            displayRecipeCards(data);
-          });
-        } else {
-          alert("Error: Data Not Found!");
-        }
-      })
-      .catch(function (error) {
-        alert("Unable to connect to the Spoonacular Api");
-      });
-  } else {
-    console.log(input);
-    var apiUrl =
-      "https://api.spoonacular.com/recipes/complexSearch?query=" +
-      input +
-      "&number=5&addRecipeInformation=true&apiKey=" +
-      randomKey(arrApiKeys);
-
-    fetch(apiUrl)
-      .then(function (response) {
-        if (response.ok) {
-          response.json().then(function (data) {
-            console.log(data);
-            displayRecipeCards(data);
-          });
-        } else {
-          alert("Error: Data Not Found!");
-        }
-      })
-      .catch(function (error) {
-        alert("Unable to connect to the Spoonacular Api");
-      });
+    dietParameter = dietParameter + "vegetarian";
   }
+
+  if (document.getElementById("vegan-option").checked === true) {
+    dietParameter = dietParameter + "vegan";
+  }
+
+  if (document.getElementById("gluten-free-option").checked === true) {
+    dietParameter = dietParameter + "gluten free";
+  }
+
+  var apiUrl =
+    "https://api.spoonacular.com/recipes/complexSearch?query=" +
+    input +
+    "&number=5&addRecipeInformation=true" +
+    dietParameter +
+    "&apiKey=" +
+    randomKey(arrApiKeys);
+
+  fetch(apiUrl)
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          console.log(data);
+          console.log(apiUrl);
+          displayRecipeCards(data);
+        });
+      } else {
+        alert("Error: Data Not Found!");
+      }
+    })
+    .catch(function (error) {
+      alert("Unable to connect to the Spoonacular Api");
+    });
 };
 
 // this function needs to have response from the API call as a parameter
