@@ -6,8 +6,16 @@ var arrApiKeys = [
   "d4e89512419b4ecfae9d762561d78c97",
   "2cb1ecb32f4e4eb9a46acc15da086c22",
   "abed78e3630b46feafb9672300be48cc",
-  "fe6c2d84686842f9af715566ad95611d",
 ];
+
+// All Api Keys
+// var arrApiKeys = [
+//   "c39f000be15b48f0b51fc4215771d97b",
+//   "d4e89512419b4ecfae9d762561d78c97",
+//   "2cb1ecb32f4e4eb9a46acc15da086c22",
+//   "abed78e3630b46feafb9672300be48cc",
+//   "fe6c2d84686842f9af715566ad95611d",
+// ];
 
 var cardContainerEl = $("#cards");
 var drinkContainerEl = $("#drink");
@@ -273,12 +281,15 @@ var displayDrinks = function (data) {
   recipeContainerEl.append(drinkContainerEl);
 
   recipeCardEl = $("<div></div");
-  recipeCardEl.attr("class", "card column recipe-card is-half-mobile mx-small");
+  recipeCardEl.attr(
+    "class",
+    "card column recipe-card is-half-mobile mx-small drink-card"
+  );
   recipeContainerEl.append(recipeCardEl);
 
   //set card image
   cardImg = $("<div></div");
-  cardImg.attr("class", "card-image");
+  cardImg.attr("class", "card-image drink-card-img");
   recipeCardEl.append(cardImg);
 
   cardFigureEl = $("<figure></figure>");
@@ -292,7 +303,7 @@ var displayDrinks = function (data) {
 
   // set card title div
   cardTitleEl = $("<div></div>");
-  cardTitleEl.attr("class", "card-title");
+  cardTitleEl.attr("class", "card-title drink-title");
   cardImgEl.append(cardTitleEl);
 
   // set card title

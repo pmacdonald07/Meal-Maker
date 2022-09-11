@@ -112,3 +112,15 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+.drink-card {
+    transform: rotate(-90deg);
+}
+
+.drink-card-img {
+    transform: rotate(90deg);
+}
+
+.drink-title {
+    transform: rotate(90deg);
+}
