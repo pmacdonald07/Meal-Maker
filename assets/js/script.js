@@ -304,11 +304,11 @@ var displayDrinks = function (data) {
   // set card title div
   cardTitleEl = $("<div></div>");
   cardTitleEl.attr("class", "card-title drink-title");
-  cardImgEl.append(cardTitleEl);
+  cardImg.append(cardTitleEl);
 
   // set card title
   cardTitleText = $("<h1></h1>");
-  cardTitleText.attr("class", "recipe-title title is-4");
+  cardTitleText.attr("class", "recipe-title title box is-4");
   cardTitleText.text(data.drinks[0].strDrink);
   cardTitleEl.append(cardTitleText);
 

@@ -147,5 +147,6 @@ body {
 }
 
 .drink-title {
-    transform: rotate(90deg);
+   background-color: white;
+   border-radius: 5px;
 }
