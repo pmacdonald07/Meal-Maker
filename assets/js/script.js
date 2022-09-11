@@ -85,6 +85,7 @@ var getSpoonApi = function (event) {
 // this function needs to have response from the API call as a parameter
 var displayRecipeCards = function (data) {
   $("#search-input").val("");
+  $("#drink").text("");
   $("#cards").text("");
   var boxDisplayEl = $("<div></div");
   boxDisplayEl.attr("class", "box more-results-container");
@@ -262,10 +263,11 @@ var checkID = function (data) {
 
 // Function checks if the drink checkbox is true
 var checkDrinks = function () {
-  console.log(">>>>>>>>>");
-
-  // If checkbox is true then run this function
-  getDrinks();
+  if (document.getElementById("drink-choice").checked === true) {
+    getDrinks();
+  } else {
+    return;
+  }
 };
 
 var getDrinks = function () {
@@ -344,95 +346,95 @@ var displayDrinks = function (data) {
   ingredientsListOrdered = $("<ol></ol>");
   ingredientsListEl.append(ingredientsListOrdered);
 
-  if (data.strIngredient1 !== null) {
-    ingredientSingle = $("<li></li>");
-    ingredientSingle.text(data.strIngredient1 + " " + data.strMeasure1);
-    ingredientsListEl.append(ingredientSingle);
-  }
+  // if (data.strIngredient1 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient1 + " " + data.strMeasure1);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
 
-  if (data.strIngredient2 !== null) {
-    ingredientSingle = $("<li></li>");
-    ingredientSingle.text(data.strIngredient2 + " " + data.strMeasure2);
-    ingredientsListEl.append(ingredientSingle);
-  }
+  // if (data.strIngredient2 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient2 + " " + data.strMeasure2);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
 
-  if (data.strIngredient3 !== null) {
-    ingredientSingle = $("<li></li>");
-    ingredientSingle.text(data.strIngredient3 + " " + data.strMeasure3);
-    ingredientsListEl.append(ingredientSingle);
-  }
+  // if (data.strIngredient3 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient3 + " " + data.strMeasure3);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
 
-  if (data.strIngredient4 !== null) {
-    ingredientSingle = $("<li></li>");
-    ingredientSingle.text(data.strIngredient4 + " " + data.strMeasure4);
-    ingredientsListEl.append(ingredientSingle);
-  }
+  // if (data.strIngredient4 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient4 + " " + data.strMeasure4);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
 
-  if (data.strIngredient5 !== null) {
-    ingredientSingle = $("<li></li>");
-    ingredientSingle.text(data.strIngredient5 + " " + data.strMeasure5);
-    ingredientsListEl.append(ingredientSingle);
-  }
+  // if (data.strIngredient5 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient5 + " " + data.strMeasure5);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
 
-  if (data.strIngredient6 !== null) {
-    ingredientSingle = $("<li></li>");
-    ingredientSingle.text(data.strIngredient6 + " " + data.strMeasure6);
-    ingredientsListEl.append(ingredientSingle);
-  }
+  // if (data.strIngredient6 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient6 + " " + data.strMeasure6);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
 
-  if (data.strIngredient6 !== null) {
-    ingredientSingle = $("<li></li>");
-    ingredientSingle.text(data.strIngredient7 + " " + data.strMeasure7);
-    ingredientsListEl.append(ingredientSingle);
-  }
+  // if (data.strIngredient6 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient7 + " " + data.strMeasure7);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
 
-  if (data.strIngredient8 !== null) {
-    ingredientSingle = $("<li></li>");
-    ingredientSingle.text(data.strIngredient8 + " " + data.strMeasure8);
-    ingredientsListEl.append(ingredientSingle);
-  }
+  // if (data.strIngredient8 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient8 + " " + data.strMeasure8);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
 
-  if (data.strIngredient9 !== null) {
-    ingredientSingle = $("<li></li>");
-    ingredientSingle.text(data.strIngredient9 + " " + data.strMeasure9);
-    ingredientsListEl.append(ingredientSingle);
-  }
+  // if (data.strIngredient9 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient9 + " " + data.strMeasure9);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
 
-  if (data.strIngredient10 !== null) {
-    ingredientSingle = $("<li></li>");
-    ingredientSingle.text(data.strIngredient10 + " " + data.strMeasure10);
-    ingredientsListEl.append(ingredientSingle);
-  }
+  // if (data.strIngredient10 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient10 + " " + data.strMeasure10);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
 
-  if (data.strIngredient11 !== null) {
-    ingredientSingle = $("<li></li>");
-    ingredientSingle.text(data.strIngredient11 + " " + data.strMeasure11);
-    ingredientsListEl.append(ingredientSingle);
-  }
+  // if (data.strIngredient11 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient11 + " " + data.strMeasure11);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
 
-  if (data.strIngredient12 !== null) {
-    ingredientSingle = $("<li></li>");
-    ingredientSingle.text(data.strIngredient12 + " " + data.strMeasure12);
-    ingredientsListEl.append(ingredientSingle);
-  }
+  // if (data.strIngredient12 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient12 + " " + data.strMeasure12);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
 
-  if (data.strIngredient13 !== null) {
-    ingredientSingle = $("<li></li>");
-    ingredientSingle.text(data.strIngredient13 + " " + data.strMeasure13);
-    ingredientsListEl.append(ingredientSingle);
-  }
+  // if (data.strIngredient13 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient13 + " " + data.strMeasure13);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
 
-  if (data.strIngredient14 !== null) {
-    ingredientSingle = $("<li></li>");
-    ingredientSingle.text(data.strIngredient14 + " " + data.strMeasure14);
-    ingredientsListEl.append(ingredientSingle);
-  }
+  // if (data.strIngredient14 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient14 + " " + data.strMeasure14);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
 
-  if (data.strIngredient15 !== null) {
-    ingredientSingle = $("<li></li>");
-    ingredientSingle.text(data.strIngredient15 + " " + data.strMeasure15);
-    ingredientsListEl.append(ingredientSingle);
-  }
+  // if (data.strIngredient15 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient15 + " " + data.strMeasure15);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
 };
 
 $("#form-submit").on("click", getSpoonApi);
