@@ -33,12 +33,11 @@ body {
 
 .fav-recipe-box {
     background-color: rgba(234, 255, 0, 0.5);
-    max-width: 400px;
+    max-width: auto;
     text-align: center;
     justify-content: center;
     display: flex;
 }
-
 .fav-recipe-header {
     font-size: 32px;
     font-weight: bolder;
@@ -49,6 +48,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 1407;
 }
 
 .results-text-header {
@@ -132,6 +132,4 @@ body {
     font-weight: bolder;
     margin-top: 210px;
 }
-#cards {
-    width: auto;
-}
+
