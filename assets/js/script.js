@@ -33,7 +33,7 @@ var getSpoonApi = function (event) {
   function randomKey(arrApiKeys) {
     return arrApiKeys[Math.floor(Math.random() * arrApiKeys.length)];
   }
-  console.log(document.getElementById("veggie-option").checked);
+
   var dietParameter = "&diet=";
 
   if (document.getElementById("veggie-option").checked === true) {
