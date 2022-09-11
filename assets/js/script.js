@@ -263,10 +263,11 @@ var checkID = function (data) {
 
 // Function checks if the drink checkbox is true
 var checkDrinks = function () {
-  console.log(">>>>>>>>>");
-
-  // If checkbox is true then run this function
-  getDrinks();
+  if (document.getElementById("drink-choice").checked === true) {
+    getDrinks();
+  } else {
+    return;
+  }
 };
 
 var getDrinks = function () {
