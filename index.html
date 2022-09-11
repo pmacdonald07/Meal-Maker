@@ -24,24 +24,26 @@
         <div class="column is-one-quarter-tablet">
             <div class="box is-fluid">
                 <form id="user-form" class="user-form">
-                <div class="field">
-                    <label class="meal">What kind of meal would you like?</label>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="Text input">
+                    <div class="field">
+                        <label class="meal">What kind of meal would you like?</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Text input" id="search-input">
+                        </div>
                     </div>
-                </div>
-                <div class="field">
-                    <div class="control">
-                        <label class="checkbox">
-                            <input type="checkbox">
-                            Would you like a drink with your meal?
-                        </label>
-                        <label class="checkbox">
-                            <input type="checkbox">
-                            Can I just have a hotdog? <i class="fa-solid fa-hotdog"></i>
-                        </label>
-                        <button class="button submit js-modal-trigger" id="form-submit" data-target="drink-modal">Submit</button>
-                    </div>
+                    <div class="field">
+                        <label class="meal-time">When is this meal?</label>
+                        <div class="control">
+                            <label class="checkbox">
+                                <input type="checkbox">
+                                Would you like a drink with your meal?
+                            </label>
+                            
+                            <label class="checkbox">
+                                <input type="checkbox" id="veggie-option">
+                                Would you like to see vegetarian recipes?
+                            </label>
+                            <button class="button submit" id="form-submit">Submit</button>
+                        </div>
                 </form>
                 </div>
             </div>
