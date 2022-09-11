@@ -1,12 +1,7 @@
 var userInput = $("#user-form");
 var submitButton = $("#form-submit");
 // An array of different apiKeys that will work in the fetch api call in the getSpoonApi function
-var arrApiKeys = [
-  "c39f000be15b48f0b51fc4215771d97b",
-  "d4e89512419b4ecfae9d762561d78c97",
-  "2cb1ecb32f4e4eb9a46acc15da086c22",
-  "abed78e3630b46feafb9672300be48cc",
-];
+var arrApiKeys = ["c39f000be15b48f0b51fc4215771d97b"];
 
 // All Api Keys
 // var arrApiKeys = [
@@ -298,24 +293,24 @@ var displayDrinks = function (data) {
   console.log("DRINKS", data);
 
   $("#drink").text("");
-  drinkContainerEl.attr("class", "drink-column");
+  drinkContainerEl.attr("class", "box drink-column");
   cardContainerEl.append(drinkContainerEl);
 
-  // create row for drink card
-  recipeContainerEl = $("<div></div");
-  recipeContainerEl.attr("class", "columns drag is-full-mobile is-centered");
-  recipeContainerEl.append(drinkContainerEl);
+  // // create row for drink card
+  // recipeContainerEl = $("<div></div");
+  // // recipeContainerEl.attr("class", "columns drag is-full-mobile is-centered");
+  // drinkContainerEl.append(recipeContainerEl);
 
   recipeCardEl = $("<div></div");
   recipeCardEl.attr(
     "class",
-    "card column recipe-card is-half-mobile mx-small drink-card"
+    "column recipe-card is-half-mobile mx-small drink-card"
   );
-  recipeContainerEl.append(recipeCardEl);
+  drinkContainerEl.append(recipeCardEl);
 
   //set card image
   cardImg = $("<div></div");
-  cardImg.attr("class", "card-image drink-card-img");
+  cardImg.attr("class", "drink-card-img");
   recipeCardEl.append(cardImg);
 
   cardFigureEl = $("<figure></figure>");
@@ -349,22 +344,6 @@ var displayDrinks = function (data) {
   // cardContentEl.text(data.searchResults[0].results[i].name);
   cardBodyEl.append(cardContentEl);
   cardContainerEl.append(recipeContainerEl);
-
-  // create another content section in the recipe card
-  cardButtonEl = $("<footer></footer>");
-  cardButtonEl.attr("class", "card-footer");
-  recipeCardEl.append(cardButtonEl);
-
-  // create the favorite button on each recipe card
-  cardFavoriteButton = $("<button></button>");
-  cardFavoriteButton.attr("class", "favorite card-footer-item button");
-  cardFavoriteButton.attr("id", "favorite");
-  cardFavoriteButton.text("Favorite");
-  cardButtonEl.append(cardFavoriteButton);
-
-  cardButtonIcon = $("<i></i>");
-  cardButtonIcon.attr("class", "fa-regular fa-star");
-  cardFavoriteButton.append(cardButtonIcon);
 };
 
 $("#form-submit").on("click", getSpoonApi);

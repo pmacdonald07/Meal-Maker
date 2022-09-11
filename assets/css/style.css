@@ -133,18 +133,18 @@ body {
     margin-top: 210px;
 }
 
-.drink-column {
+/* .drink-column {
     display: flex;
     flex-direction: column;
 }
 
-.drink-card {
+/* .drink-card {
     transform: rotate(-90deg);
-}
+} */
 
-.drink-card-img {
+/* .drink-card-img {
     transform: rotate(90deg);
-}
+} */
 
 .drink-title {
    background-color: white;
