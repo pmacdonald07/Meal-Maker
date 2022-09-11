@@ -1,9 +1,16 @@
 var userInput = $("#user-form");
 var submitButton = $("#form-submit");
 // An array of different apiKeys that will work in the fetch api call in the getSpoonApi function
-var arrApiKeys = ["c39f000be15b48f0b51fc4215771d97b"];
+var arrApiKeys = [
+  "c39f000be15b48f0b51fc4215771d97b",
+  "d4e89512419b4ecfae9d762561d78c97",
+  "2cb1ecb32f4e4eb9a46acc15da086c22",
+  "abed78e3630b46feafb9672300be48cc",
+  "fe6c2d84686842f9af715566ad95611d",
+];
 
 var cardContainerEl = $("#cards");
+var drinkContainerEl = $("#drink");
 
 var getSpoonApi = function (event) {
   event.preventDefault();
@@ -18,8 +25,6 @@ var getSpoonApi = function (event) {
   // Converts the user's input into a value the apiUrl will be able to read
   var userText = document.querySelector(".input");
   var input = userText.value.trim();
-
-  checkDrinks();
 
   // Chooses an apiKey at random from the arrApiKeys to be used in the fetch api call
   function randomKey(arrApiKeys) {
@@ -161,6 +166,8 @@ var displayRecipeCards = function (data) {
     $("#fav").sortable({ connectWith: ".drag" });
   };
   Draggable();
+
+  checkDrinks();
 };
 
 var getId = function (id) {
@@ -202,9 +209,9 @@ var updateCardText = function (idCallResponse) {
   cardContentEl.text(idCallResponse.readyInMinutes);
 };
 
-var moreResults = function (event) {
-  console.log(">>>>>>>", event);
-};
+// var moreResults = function (event) {
+//   console.log(">>>>>>>", event);
+// };
 
 var checkID = function (data) {
   $(".recipe-card").each(function () {
@@ -224,7 +231,15 @@ var checkID = function (data) {
   });
 };
 
-var displayDrinks = function () {
+// Function checks if the drink checkbox is true
+var checkDrinks = function () {
+  console.log(">>>>>>>>>");
+
+  // If checkbox is true then run this function
+  getDrinks();
+};
+
+var getDrinks = function () {
   console.log("Drinks");
 
   var apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
@@ -234,6 +249,7 @@ var displayDrinks = function () {
       if (response.ok) {
         response.json().then(function (data) {
           console.log(data);
+          displayDrinks(data);
         });
       } else {
         alert("Error: Data Not Found!");
@@ -244,14 +260,76 @@ var displayDrinks = function () {
     });
 };
 
-// Function checks if the drink checkbox is true
-var checkDrinks = function () {
-  console.log(">>>>>>>>>");
+var displayDrinks = function (data) {
+  console.log("DRINKS", data);
 
-  // If checkbox is true then run this function
-  displayDrinks();
+  $("#drink").text("");
+  drinkContainerEl.attr("class", "drink-column");
+  cardContainerEl.append(drinkContainerEl);
+
+  // create row for drink card
+  recipeContainerEl = $("<div></div");
+  recipeContainerEl.attr("class", "columns drag is-full-mobile is-centered");
+  recipeContainerEl.append(drinkContainerEl);
+
+  recipeCardEl = $("<div></div");
+  recipeCardEl.attr("class", "card column recipe-card is-half-mobile mx-small");
+  recipeContainerEl.append(recipeCardEl);
+
+  //set card image
+  cardImg = $("<div></div");
+  cardImg.attr("class", "card-image");
+  recipeCardEl.append(cardImg);
+
+  cardFigureEl = $("<figure></figure>");
+  cardFigureEl.attr("class", "image");
+  cardImg.append(cardFigureEl);
+
+  cardImgEl = $("<img></img>");
+  cardImgEl.attr("src", data.drinks[0].strDrinkThumb);
+  cardImgEl.attr("alt", "Picture of recipe");
+  cardFigureEl.append(cardImgEl);
+
+  // set card title div
+  cardTitleEl = $("<div></div>");
+  cardTitleEl.attr("class", "card-title");
+  cardImgEl.append(cardTitleEl);
+
+  // set card title
+  cardTitleText = $("<h1></h1>");
+  cardTitleText.attr("class", "recipe-title title is-4");
+  cardTitleText.text(data.drinks[0].strDrink);
+  cardTitleEl.append(cardTitleText);
+
+  // set card body
+  cardBodyEl = $("<div></div");
+  cardBodyEl.attr("class", "card-content");
+  recipeCardEl.append(cardBodyEl);
+
+  // set card content
+  cardContentEl = $("<p></p>");
+  cardContentEl.attr("class", "content");
+  // cardContentEl.text(data.searchResults[0].results[i].name);
+  cardBodyEl.append(cardContentEl);
+  cardContainerEl.append(recipeContainerEl);
+
+  // create another content section in the recipe card
+  cardButtonEl = $("<footer></footer>");
+  cardButtonEl.attr("class", "card-footer");
+  recipeCardEl.append(cardButtonEl);
+
+  // create the favorite button on each recipe card
+  cardFavoriteButton = $("<button></button>");
+  cardFavoriteButton.attr("class", "favorite card-footer-item button");
+  cardFavoriteButton.attr("id", "favorite");
+  cardFavoriteButton.text("Favorite");
+  cardButtonEl.append(cardFavoriteButton);
+
+  cardButtonIcon = $("<i></i>");
+  cardButtonIcon.attr("class", "fa-regular fa-star");
+  cardFavoriteButton.append(cardButtonIcon);
 };
 
 $("#form-submit").on("click", getSpoonApi);
 
-$("#more-results").on("click", moreResults);
+// $("#more-results").on("click", moreResults);

@@ -107,3 +107,8 @@ body {
     max-width: 300px;
     max-height: 500px;
 }
+
+.drink-column {
+    display: flex;
+    flex-direction: column;
+}
