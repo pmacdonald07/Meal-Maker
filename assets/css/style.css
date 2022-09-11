@@ -132,10 +132,6 @@ body {
     font-weight: bolder;
     margin-top: 210px;
 }
-#cards {
-    width: auto;
-}
-
 
 .drink-column {
     display: flex;
