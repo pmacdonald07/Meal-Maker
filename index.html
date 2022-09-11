@@ -31,17 +31,29 @@
                         </div>
                     </div>
                     <div class="field">
-                        <label class="meal-time">When is this meal?</label>
                         <div class="control">
                             <label class="checkbox">
-                                <input type="checkbox">
+                                <input type="checkbox" id="drink-choice">
                                 Would you like a drink with your meal?
                             </label>
-                            
-                            <label class="checkbox">
-                                <input type="checkbox" id="veggie-option">
-                                Would you like to see vegetarian recipes?
+                            <br>
+                            Diet Options:
+                            <br>
+                            <label class="radio">
+                                <input type="radio" name="diet" id="veggie-option">
+                                Vegetarian
                             </label>
+                            <br>
+                            <label class="radio">
+                                <input type="radio" name="diet" id="vegan-option">
+                                Vegan
+                            </label>
+                            <br>
+                            <label class="radio">
+                                <input type="radio" name="diet" id="gluten-free-option">
+                                Gluten-free
+                            </label>
+                            <br>
                             <button class="button submit" id="form-submit">Submit</button>
                         </div>
                 </form>
@@ -61,6 +73,12 @@
 
         </div>
         <div class="column is-three-quarters-tablet" id="cards">
+        </div>
+
+        <div>
+            <div class="column is-three-quarters-tablet">
+                <div id="drink">
+                </div>
         </div>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

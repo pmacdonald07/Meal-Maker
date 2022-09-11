@@ -48,7 +48,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 1407;
 }
 
 .results-text-header {
@@ -133,7 +132,22 @@ body {
     margin-top: 210px;
 }
 
-#cards {
+/* .drink-column {
     display: flex;
+    flex-direction: column;
+}
+
+/* .drink-card {
+    transform: rotate(-90deg);
+} */
+
+/* .drink-card-img {
+    transform: rotate(90deg);
+} */
+
+
+
+#cards {
+    display:flex;
     flex-wrap: wrap;
 }
