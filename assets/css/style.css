@@ -6,6 +6,7 @@
 html {
     background-image:url(https://images.pexels.com/photos/616401/pexels-photo-616401.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
     background-repeat: no-repeat;
+    background-attachment: fixed;
     background-size: cover;
 }
 
@@ -21,6 +22,8 @@ body {
 
 .fav-recipe-box {
     background-color: rgba(49, 169, 15, 0.5);
+    display: flex;
+    justify-content: center;
 }
 
 .fav-recipe-header {
@@ -107,4 +110,8 @@ body {
     max-width: 300px;
     max-height: 550px;
     margin: 1rem;
+}
+
+.drag.draggable {
+    opacity: 0.8;
 }
