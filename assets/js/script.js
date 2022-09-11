@@ -57,7 +57,7 @@ var getSpoonApi = function (event) {
     var apiUrl =
       "https://api.spoonacular.com/recipes/complexSearch?query=" +
       input +
-      "&number=5&apiKey=" +
+      "&number=5&addRecipeInformation=true&apiKey=" +
       randomKey(arrApiKeys);
 
     fetch(apiUrl)
@@ -79,6 +79,7 @@ var getSpoonApi = function (event) {
 
 // this function needs to have response from the API call as a parameter
 var displayRecipeCards = function (data) {
+  $("#search-input").val("");
   $("#cards").text("");
   var boxDisplayEl = $("<div></div");
   boxDisplayEl.attr("class", "box more-results-container");
@@ -115,7 +116,7 @@ var displayRecipeCards = function (data) {
       "class",
       "card column recipe-card is-half-mobile mx-small"
     );
-    recipeCardEl.attr("id", data.searchResults[0].results[i].id);
+    recipeCardEl.attr("id", data.results[i].id);
     recipeContainerEl.append(recipeCardEl);
 
     //set card image
@@ -129,12 +130,12 @@ var displayRecipeCards = function (data) {
 
     // Creates an anchor tag within the figure tag and gives it the href attribute with the recipe link and takes the user to it in a new tab
     cardImgLinkEl = $("<a></a>");
-    cardImgLinkEl.attr("href", data.searchResults[0].results[i].link);
+    cardImgLinkEl.attr("href", data.results[i].sourceUrl);
     cardImgLinkEl.attr("target", "_blank");
     cardFigureEl.append(cardImgLinkEl);
 
     cardImgEl = $("<img></img>");
-    cardImgEl.attr("src", data.searchResults[0].results[i].image);
+    cardImgEl.attr("src", data.results[i].image);
     cardImgEl.attr("alt", "Picture of recipe");
     cardImgLinkEl.append(cardImgEl);
 
@@ -146,7 +147,7 @@ var displayRecipeCards = function (data) {
     // set card title
     cardTitleText = $("<h1></h1>");
     cardTitleText.attr("class", "recipe-title title is-4");
-    cardTitleText.text(data.searchResults[0].results[i].name);
+    cardTitleText.text(data.results[i].title);
     cardTitleEl.append(cardTitleText);
 
     // set card body
@@ -157,7 +158,7 @@ var displayRecipeCards = function (data) {
     // set card content
     cardContentEl = $("<p></p>");
     cardContentEl.attr("class", "content");
-    cardContentEl.text(data.searchResults[0].results[i].name);
+    cardContentEl.text(data.results[i].title);
     cardBodyEl.append(cardContentEl);
     cardContainerEl.append(recipeContainerEl);
 
@@ -177,7 +178,7 @@ var displayRecipeCards = function (data) {
     cardButtonIcon.attr("class", "fa-regular fa-star");
     cardFavoriteButton.append(cardButtonIcon);
 
-    getId(data.searchResults[0].results[i].id);
+    getId(data.results[i].id);
 
     // console.log(data.searchResults[0].results[i].id);
   }
