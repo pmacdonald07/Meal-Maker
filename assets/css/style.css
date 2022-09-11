@@ -7,15 +7,24 @@ html {
     background-image:url(https://images.pexels.com/photos/616401/pexels-photo-616401.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
     background-repeat: no-repeat;
     background-size: cover;
+    position: absolute;
+    width: 100%;
+    background-attachment: fixed;
 }
 
 header {
 height: 100px;
-font-family: 'Sacramento', cursive;
-color:crimson;
-text-align: center;
+align-content: center;
 font-size: 50px;
-justify-content: space-around;
+text-align: center;
+}
+
+header h1 {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 25px;
+    display: inline-block;
+    font-family: 'Sacramento', cursive;
+    color:rgba(0, 169, 203, 0.8);
 }
 
 body {
@@ -122,4 +131,7 @@ body {
     font-size: 75px;
     font-weight: bolder;
     margin-top: 210px;
+}
+#cards {
+    width: auto;
 }

@@ -3,6 +3,10 @@ var submitButton = $("#form-submit");
 // An array of different apiKeys that will work in the fetch api call in the getSpoonApi function
 var arrApiKeys = [
   "c39f000be15b48f0b51fc4215771d97b",
+  "d4e89512419b4ecfae9d762561d78c97",
+  "2cb1ecb32f4e4eb9a46acc15da086c22",
+  "abed78e3630b46feafb9672300be48cc",
+  "fe6c2d84686842f9af715566ad95611d",
 ];
 
 var cardContainerEl = $("#cards");
