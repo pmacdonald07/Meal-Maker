@@ -10,12 +10,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@100&display=swap" rel="stylesheet">
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Sacramento&display=swap" rel="stylesheet">       
+    <title>MealMaker</title>
 </head>
 
 <body>
     <header>
-        Page Header
+    <h1>MealMaker</h1>
     </header>
     <main class="columns is-centered">
         <div class="column is-one-quarter-tablet">
@@ -28,18 +31,16 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label class="meal-time">When is this meal?</label>
                     <div class="control">
                         <label class="checkbox">
                             <input type="checkbox" id="drink-checkbox">
                             Would you like a drink with your meal?
                         </label>
-                        
                         <label class="checkbox">
                             <input type="checkbox">
-                            Can I just have a hotdog?
+                            Can I just have a hotdog? <i class="fa-solid fa-hotdog"></i>
                         </label>
-                        <button class="button submit" id="form-submit">Submit</button>
+                        <button class="button submit js-modal-trigger" id="form-submit" data-target="drink-modal">Submit</button>
                     </div>
                 </form>
                 </div>
@@ -67,5 +68,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY=" crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
+    <div id="drink-modal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+          <div class="box">
+            <p>Would you link a drink with that?</p>
+            <button class="drink-yes">Yes</button>
+            <button class="drink-no">No</button>
+          </div>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+      </div>
 </body>
 </html>
