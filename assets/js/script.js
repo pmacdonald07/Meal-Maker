@@ -1,14 +1,19 @@
 var userInput = $("#user-form");
 var submitButton = $("#form-submit");
 // An array of different apiKeys that will work in the fetch api call in the getSpoonApi function
-var arrApiKeys = [
-  "c39f000be15b48f0b51fc4215771d97b",
-  "d4e89512419b4ecfae9d762561d78c97",
-  "2cb1ecb32f4e4eb9a46acc15da086c22",
-  "abed78e3630b46feafb9672300be48cc",
-];
+var arrApiKeys = ["c39f000be15b48f0b51fc4215771d97b"];
+
+// All Api Keys
+// var arrApiKeys = [
+//   "c39f000be15b48f0b51fc4215771d97b",
+//   "d4e89512419b4ecfae9d762561d78c97",
+//   "2cb1ecb32f4e4eb9a46acc15da086c22",
+//   "abed78e3630b46feafb9672300be48cc",
+//   "fe6c2d84686842f9af715566ad95611d",
+// ];
 
 var cardContainerEl = $("#cards");
+var drinkContainerEl = $("#drink");
 
 var getSpoonApi = function (event) {
   event.preventDefault();
@@ -28,58 +33,51 @@ var getSpoonApi = function (event) {
   function randomKey(arrApiKeys) {
     return arrApiKeys[Math.floor(Math.random() * arrApiKeys.length)];
   }
-  console.log(document.getElementById("veggie-option").checked);
+
+  var dietParameter = "&diet=";
 
   if (document.getElementById("veggie-option").checked === true) {
     console.log(input);
-    var apiUrl =
-      "https://api.spoonacular.com/recipes/complexSearch?query=" +
-      input +
-      "&number=5&diet=vegetarian&addRecipeInformation=true&apiKey=" +
-      randomKey(arrApiKeys);
-
-    fetch(apiUrl)
-      .then(function (response) {
-        if (response.ok) {
-          response.json().then(function (data) {
-            console.log(data);
-            displayRecipeCards(data);
-          });
-        } else {
-          alert("Error: Data Not Found!");
-        }
-      })
-      .catch(function (error) {
-        alert("Unable to connect to the Spoonacular Api");
-      });
-  } else {
-    console.log(input);
-    var apiUrl =
-      "https://api.spoonacular.com/recipes/complexSearch?query=" +
-      input +
-      "&number=5&addRecipeInformation=true&apiKey=" +
-      randomKey(arrApiKeys);
-
-    fetch(apiUrl)
-      .then(function (response) {
-        if (response.ok) {
-          response.json().then(function (data) {
-            console.log(data);
-            displayRecipeCards(data);
-          });
-        } else {
-          alert("Error: Data Not Found!");
-        }
-      })
-      .catch(function (error) {
-        alert("Unable to connect to the Spoonacular Api");
-      });
+    dietParameter = dietParameter + "vegetarian";
   }
+
+  if (document.getElementById("vegan-option").checked === true) {
+    dietParameter = dietParameter + "vegan";
+  }
+
+  if (document.getElementById("gluten-free-option").checked === true) {
+    dietParameter = dietParameter + "gluten free";
+  }
+
+  var apiUrl =
+    "https://api.spoonacular.com/recipes/complexSearch?query=" +
+    input +
+    "&number=5&addRecipeInformation=true" +
+    dietParameter +
+    "&apiKey=" +
+    randomKey(arrApiKeys);
+
+  fetch(apiUrl)
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          console.log(data);
+          console.log(apiUrl);
+          displayRecipeCards(data);
+        });
+      } else {
+        alert("Error: Data Not Found!");
+      }
+    })
+    .catch(function (error) {
+      alert("Unable to connect to the Spoonacular Api");
+    });
 };
 
 // this function needs to have response from the API call as a parameter
 var displayRecipeCards = function (data) {
   $("#search-input").val("");
+  $("#drink").text("");
   $("#cards").text("");
   var boxDisplayEl = $("<div></div");
   boxDisplayEl.attr("class", "box more-results-container");
@@ -97,6 +95,7 @@ var displayRecipeCards = function (data) {
 
   var moreResultsButton = $("<button></button>");
   moreResultsButton.attr("class", "more-results-button button");
+  moreResultsButton.attr("id", "more-results");
   moreResultsButton.text("Display Different Recipes");
   boxDisplayEl.append(moreResultsButton);
 
@@ -189,6 +188,8 @@ var displayRecipeCards = function (data) {
     $("#fav").sortable({ connectWith: ".drag" });
   };
   Draggable();
+
+  checkDrinks();
 };
 
 var getId = function (id) {
@@ -214,7 +215,6 @@ var getId = function (id) {
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          console.log(data);
           checkID(data);
         });
       } else {
@@ -231,16 +231,13 @@ var updateCardText = function (idCallResponse) {
   cardContentEl.text(idCallResponse.readyInMinutes);
 };
 
-var favoriteRecipe = function () {
-  console.log("Did it work?");
-};
+// var moreResults = function (event) {
+//   console.log(">>>>>>>", event);
+// };
 
 var checkID = function (data) {
   $(".recipe-card").each(function () {
-    console.log(data.id);
-    console.log($(this).attr("id"));
     if (data.id == $(this).attr("id")) {
-      console.log("yes");
       $(this)
         .find("p")
         .html(
@@ -252,9 +249,186 @@ var checkID = function (data) {
             data.servings
         );
     } else {
-      console.log("no");
     }
   });
 };
 
-$("#user-form").on("submit", getSpoonApi);
+// Function checks if the drink checkbox is true
+var checkDrinks = function () {
+  if (document.getElementById("drink-choice").checked === true) {
+    getDrinks();
+  } else {
+    return;
+  }
+};
+
+var getDrinks = function () {
+  console.log("Drinks");
+
+  var apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
+
+  fetch(apiUrl)
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          console.log(data);
+          displayDrinks(data);
+        });
+      } else {
+        alert("Error: Data Not Found!");
+      }
+    })
+    .catch(function (error) {
+      alert("Unable to connect to the CocktailDB Api");
+    });
+};
+
+var displayDrinks = function (data) {
+  console.log("DRINKS", data);
+
+  $("#drink").text("");
+  drinkContainerEl.attr("class", "box drink-column columns");
+  cardContainerEl.append(drinkContainerEl);
+
+  recipeCardEl = $("<div></div");
+  recipeCardEl.attr(
+    "class",
+    "column recipe-card is-half-mobile mx-small drink-card"
+  );
+  drinkContainerEl.append(recipeCardEl);
+
+  //set card image
+  cardImg = $("<div></div");
+  cardImg.attr("class", "drink-card-img");
+  recipeCardEl.append(cardImg);
+
+  cardFigureEl = $("<figure></figure>");
+  cardFigureEl.attr("class", "image");
+  cardImg.append(cardFigureEl);
+
+  cardImgEl = $("<img></img>");
+  cardImgEl.attr("src", data.drinks[0].strDrinkThumb);
+  cardImgEl.attr("alt", "Picture of recipe");
+  cardFigureEl.append(cardImgEl);
+
+  // set card title div
+  cardTitleEl = $("<div></div>");
+  cardTitleEl.attr("class", "card-title drink-title");
+  cardImg.append(cardTitleEl);
+
+  // set card title
+  cardTitleText = $("<h1></h1>");
+  cardTitleText.attr("class", "recipe-title title box is-4");
+  cardTitleText.text(data.drinks[0].strDrink);
+  cardTitleEl.append(cardTitleText);
+
+  var ingredientsEl = $("#ingredients");
+
+  // Set Ingredients Column
+  ingredientsTitleEl = $("<div></div>");
+  ingredientsEl.append(ingredientsTitleEl);
+
+  ingredientsTitleText = $("<h1></h1>");
+  ingredientsTitleText.attr("class", "ingredients-title");
+  ingredientsTitleEl.append(ingredientsTitleText);
+
+  ingredientsListEl = $("<div></div>");
+  ingredientsEl.append(ingredientsListEl);
+
+  ingredientsListOrdered = $("<ol></ol>");
+  ingredientsListEl.append(ingredientsListOrdered);
+
+  // if (data.strIngredient1 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient1 + " " + data.strMeasure1);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
+
+  // if (data.strIngredient2 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient2 + " " + data.strMeasure2);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
+
+  // if (data.strIngredient3 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient3 + " " + data.strMeasure3);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
+
+  // if (data.strIngredient4 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient4 + " " + data.strMeasure4);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
+
+  // if (data.strIngredient5 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient5 + " " + data.strMeasure5);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
+
+  // if (data.strIngredient6 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient6 + " " + data.strMeasure6);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
+
+  // if (data.strIngredient6 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient7 + " " + data.strMeasure7);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
+
+  // if (data.strIngredient8 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient8 + " " + data.strMeasure8);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
+
+  // if (data.strIngredient9 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient9 + " " + data.strMeasure9);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
+
+  // if (data.strIngredient10 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient10 + " " + data.strMeasure10);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
+
+  // if (data.strIngredient11 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient11 + " " + data.strMeasure11);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
+
+  // if (data.strIngredient12 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient12 + " " + data.strMeasure12);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
+
+  // if (data.strIngredient13 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient13 + " " + data.strMeasure13);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
+
+  // if (data.strIngredient14 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient14 + " " + data.strMeasure14);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
+
+  // if (data.strIngredient15 !== null) {
+  //   ingredientSingle = $("<li></li>");
+  //   ingredientSingle.text(data.strIngredient15 + " " + data.strMeasure15);
+  //   ingredientsListEl.append(ingredientSingle);
+  // }
+};
+
+$("#form-submit").on("click", getSpoonApi);
+
+// $("#more-results").on("click", moreResults);

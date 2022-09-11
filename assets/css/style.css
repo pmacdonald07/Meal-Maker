@@ -133,3 +133,20 @@ body {
     margin-top: 210px;
 }
 
+/* .drink-column {
+    display: flex;
+    flex-direction: column;
+}
+
+/* .drink-card {
+    transform: rotate(-90deg);
+} */
+
+/* .drink-card-img {
+    transform: rotate(90deg);
+} */
+
+.drink-title {
+   background-color: white;
+   border-radius: 5px;
+}
