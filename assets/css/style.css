@@ -7,12 +7,24 @@ html {
     background-image:url(https://images.pexels.com/photos/616401/pexels-photo-616401.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
     background-repeat: no-repeat;
     background-size: cover;
+    position: absolute;
+    width: 100%;
+    background-attachment: fixed;
 }
 
 header {
 height: 100px;
+align-content: center;
 font-size: 50px;
-justify-content: space-around;
+text-align: center;
+}
+
+header h1 {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 25px;
+    display: inline-block;
+    font-family: 'Sacramento', cursive;
+    color:rgba(0, 169, 203, 0.8);
 }
 
 body {
@@ -21,12 +33,16 @@ body {
 
 .fav-recipe-box {
     background-color: rgba(234, 255, 0, 0.5);
+    max-width: 400px;
+    text-align: center;
+    justify-content: center;
+    display: flex;
 }
 
 .fav-recipe-header {
     font-size: 32px;
     font-weight: bolder;
-    text-align: center;
+    justify-content: center;
 }
 
 .more-results-container {
@@ -106,4 +122,16 @@ body {
 .recipe-card {
     max-width: 300px;
     max-height: 500px;
+}
+
+#welcome {
+    font-family: 'Sacramento', cursive;
+    color: red;
+    text-align: center;
+    font-size: 75px;
+    font-weight: bolder;
+    margin-top: 210px;
+}
+#cards {
+    width: auto;
 }
