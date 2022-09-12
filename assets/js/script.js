@@ -1,15 +1,24 @@
 var userInput = $("#user-form");
 var submitButton = $("#form-submit");
 // An array of different apiKeys that will work in the fetch api call in the getSpoonApi function
-var arrApiKeys = ["c39f000be15b48f0b51fc4215771d97b"];
+var arrApiKeys = [
+  "c39f000be15b48f0b51fc4215771d97b",
+  "ad6278e15c864117bf13998d6f2409e0",
+  "d4e89512419b4ecfae9d762561d78c97",
+  "2cb1ecb32f4e4eb9a46acc15da086c22",
+  "abed78e3630b46feafb9672300be48cc",
+  "fe6c2d84686842f9af715566ad95611d",
+];
 
 // All Api Keys
 // var arrApiKeys = [
 //   "c39f000be15b48f0b51fc4215771d97b",
+//   "ad6278e15c864117bf13998d6f2409e0",
 //   "d4e89512419b4ecfae9d762561d78c97",
 //   "2cb1ecb32f4e4eb9a46acc15da086c22",
 //   "abed78e3630b46feafb9672300be48cc",
 //   "fe6c2d84686842f9af715566ad95611d",
+//   "d47220e0ade34b3ea9c039613858c695"
 // ];
 
 var cardContainerEl = $("#cards");
@@ -101,7 +110,10 @@ var displayRecipeCards = function (data) {
 
   // create row for forecast cards
   recipeContainerEl = $("<div></div");
-  recipeContainerEl.attr("class", "columns drag is-full-mobile is-centered");
+  recipeContainerEl.attr(
+    "class",
+    "columns drag is-full-mobile is-centered recipe-container"
+  );
   cardContainerEl.append(recipeContainerEl);
 
   function randomKey(arrApiKeys) {
@@ -166,16 +178,16 @@ var displayRecipeCards = function (data) {
     cardButtonEl.attr("class", "card-footer");
     recipeCardEl.append(cardButtonEl);
 
-    // create the favorite button on each recipe card
-    cardFavoriteButton = $("<button></button>");
-    cardFavoriteButton.attr("class", "favorite card-footer-item button");
-    cardFavoriteButton.attr("id", "favorite");
-    cardFavoriteButton.text("Favorite");
-    cardButtonEl.append(cardFavoriteButton);
+    // create the more info button on each recipe card
+    cardMoreInfoButton = $("<button></button>");
+    cardMoreInfoButton.attr("class", "more-info card-footer-item button");
+    cardMoreInfoButton.attr("id", "more-info");
+    cardMoreInfoButton.text("More Info");
+    cardButtonEl.append(cardMoreInfoButton);
 
     cardButtonIcon = $("<i></i>");
-    cardButtonIcon.attr("class", "fa-regular fa-star");
-    cardFavoriteButton.append(cardButtonIcon);
+    cardButtonIcon.attr("class", "fa-regular fa-book-bookmark");
+    cardMoreInfoButton.append(cardButtonIcon);
 
     getId(data.results[i].id);
 
@@ -231,10 +243,6 @@ var updateCardText = function (idCallResponse) {
   cardContentEl.text(idCallResponse.readyInMinutes);
 };
 
-// var moreResults = function (event) {
-//   console.log(">>>>>>>", event);
-// };
-
 var checkID = function (data) {
   $(".recipe-card").each(function () {
     if (data.id == $(this).attr("id")) {
@@ -287,13 +295,13 @@ var displayDrinks = function (data) {
   console.log("DRINKS", data);
 
   $("#drink").text("");
-  drinkContainerEl.attr("class", "box drink-column columns");
+  drinkContainerEl.attr("class", "drink-section box drink-column columns");
   cardContainerEl.append(drinkContainerEl);
 
   recipeCardEl = $("<div></div");
   recipeCardEl.attr(
     "class",
-    "column recipe-card is-half-mobile mx-small drink-card"
+    "column recipe-card is-half-mobile mx-small drink-card drink-recipe"
   );
   drinkContainerEl.append(recipeCardEl);
 
@@ -322,111 +330,298 @@ var displayDrinks = function (data) {
   cardTitleText.text(data.drinks[0].strDrink);
   cardTitleEl.append(cardTitleText);
 
-  var ingredientsEl = $("#ingredients");
-
   // Set Ingredients Column
-  ingredientsTitleEl = $("<div></div>");
-  ingredientsEl.append(ingredientsTitleEl);
+  var ingredientsEl = $("#ingredients");
+  ingredientsEl.attr("class", "column ingredients-column");
+  drinkContainerEl.append(ingredientsEl);
 
   ingredientsTitleText = $("<h1></h1>");
   ingredientsTitleText.attr("class", "ingredients-title");
-  ingredientsTitleEl.append(ingredientsTitleText);
+  ingredientsTitleText.text("INGREDIENTS:");
+  ingredientsEl.append(ingredientsTitleText);
 
   ingredientsListEl = $("<div></div>");
   ingredientsEl.append(ingredientsListEl);
 
   ingredientsListOrdered = $("<ol></ol>");
+  ingredientsListOrdered.attr("class", "ingredients");
   ingredientsListEl.append(ingredientsListOrdered);
 
-  // if (data.strIngredient1 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient1 + " " + data.strMeasure1);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  // The drink api returns data back on 1 random drink. Each random drink has 15 ingredient data points and 15 measurement data points to go with each ingredient data point. Below are 15 if statements to check if each ingredient data point has a value. In each if statement there is another if statement to check if that ingredient comes with a measurement data point and sets the text value accordingly.
 
-  // if (data.strIngredient2 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient2 + " " + data.strMeasure2);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  // If the ingredient value in the data has a value then create a list element for that unique ingredient
+  if (data.drinks[0].strIngredient1 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
 
-  // if (data.strIngredient3 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient3 + " " + data.strMeasure3);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+    // If the ingredient has a measurement value then set the list element text to the ingredient name + the measurement
+    if (data.drinks[0].strMeasure1 !== null) {
+      ingredientSingle.text(
+        data.drinks[0].strIngredient1 + " - " + data.drinks[0].strMeasure1
+      );
+      //Else the ingredient has a measurement value of null and set the list element text to just the ingredient name
+    } else {
+      ingredientSingle.text(data.drinks[0].strIngredient1);
+    }
+    ingredientsListOrdered.append(ingredientSingle);
+  }
 
-  // if (data.strIngredient4 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient4 + " " + data.strMeasure4);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  // If the ingredient value in the data has a value then create a list element for that unique ingredient
+  if (data.drinks[0].strIngredient2 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
 
-  // if (data.strIngredient5 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient5 + " " + data.strMeasure5);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+    // If the ingredient has a measurement value then set the list element text to the ingredient name + the measurement
+    if (data.drinks[0].strMeasure2 !== null) {
+      ingredientSingle.text(
+        data.drinks[0].strIngredient2 + " - " + data.drinks[0].strMeasure2
+      );
+      //Else the ingredient has a measurement value of null and set the list element text to just the ingredient name
+    } else {
+      ingredientSingle.text(data.drinks[0].strIngredient2);
+    }
+    ingredientsListOrdered.append(ingredientSingle);
+  }
 
-  // if (data.strIngredient6 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient6 + " " + data.strMeasure6);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  // If the ingredient value in the data has a value then create a list element for that unique ingredient
+  if (data.drinks[0].strIngredient3 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
 
-  // if (data.strIngredient6 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient7 + " " + data.strMeasure7);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+    // If the ingredient has a measurement value then set the list element text to the ingredient name + the measurement
+    if (data.drinks[0].strMeasure3 !== null) {
+      ingredientSingle.text(
+        data.drinks[0].strIngredient3 + " - " + data.drinks[0].strMeasure3
+      );
+      //Else the ingredient has a measurement value of null and set the list element text to just the ingredient name
+    } else {
+      ingredientSingle.text(data.drinks[0].strIngredient3);
+    }
+    ingredientsListOrdered.append(ingredientSingle);
+  }
 
-  // if (data.strIngredient8 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient8 + " " + data.strMeasure8);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  // If the ingredient value in the data has a value then create a list element for that unique ingredient
+  if (data.drinks[0].strIngredient4 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
 
-  // if (data.strIngredient9 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient9 + " " + data.strMeasure9);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+    // If the ingredient has a measurement value then set the list element text to the ingredient name + the measurement
+    if (data.drinks[0].strMeasure4 !== null) {
+      ingredientSingle.text(
+        data.drinks[0].strIngredient4 + " - " + data.drinks[0].strMeasure4
+      );
+      //Else the ingredient has a measurement value of null and set the list element text to just the ingredient name
+    } else {
+      ingredientSingle.text(data.drinks[0].strIngredient4);
+    }
+    ingredientsListOrdered.append(ingredientSingle);
+  }
 
-  // if (data.strIngredient10 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient10 + " " + data.strMeasure10);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  // If the ingredient value in the data has a value then create a list element for that unique ingredient
+  if (data.drinks[0].strIngredient5 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
 
-  // if (data.strIngredient11 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient11 + " " + data.strMeasure11);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+    // If the ingredient has a measurement value then set the list element text to the ingredient name + the measurement
+    if (data.drinks[0].strMeasure5 !== null) {
+      ingredientSingle.text(
+        data.drinks[0].strIngredient5 + " - " + data.drinks[0].strMeasure5
+      );
+      //Else the ingredient has a measurement value of null and set the list element text to just the ingredient name
+    } else {
+      ingredientSingle.text(data.drinks[0].strIngredient5);
+    }
+    ingredientsListOrdered.append(ingredientSingle);
+  }
 
-  // if (data.strIngredient12 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient12 + " " + data.strMeasure12);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  // If the ingredient value in the data has a value then create a list element for that unique ingredient
+  if (data.drinks[0].strIngredient6 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
 
-  // if (data.strIngredient13 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient13 + " " + data.strMeasure13);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+    // If the ingredient has a measurement value then set the list element text to the ingredient name + the measurement
+    if (data.drinks[0].strMeasure6 !== null) {
+      ingredientSingle.text(
+        data.drinks[0].strIngredient6 + " - " + data.drinks[0].strMeasure6
+      );
+      //Else the ingredient has a measurement value of null and set the list element text to just the ingredient name
+    } else {
+      ingredientSingle.text(data.drinks[0].strIngredient6);
+    }
+    ingredientsListOrdered.append(ingredientSingle);
+  }
 
-  // if (data.strIngredient14 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient14 + " " + data.strMeasure14);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+  // If the ingredient value in the data has a value then create a list element for that unique ingredient
+  if (data.drinks[0].strIngredient7 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
 
-  // if (data.strIngredient15 !== null) {
-  //   ingredientSingle = $("<li></li>");
-  //   ingredientSingle.text(data.strIngredient15 + " " + data.strMeasure15);
-  //   ingredientsListEl.append(ingredientSingle);
-  // }
+    // If the ingredient has a measurement value then set the list element text to the ingredient name + the measurement
+    if (data.drinks[0].strMeasure7 !== null) {
+      ingredientSingle.text(
+        data.drinks[0].strIngredient7 + " - " + data.drinks[0].strMeasure7
+      );
+      //Else the ingredient has a measurement value of null and set the list element text to just the ingredient name
+    } else {
+      ingredientSingle.text(data.drinks[0].strIngredient7);
+    }
+    ingredientsListOrdered.append(ingredientSingle);
+  }
+
+  // If the ingredient value in the data has a value then create a list element for that unique ingredient
+  if (data.drinks[0].strIngredient8 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
+
+    // If the ingredient has a measurement value then set the list element text to the ingredient name + the measurement
+    if (data.drinks[0].strMeasure8 !== null) {
+      ingredientSingle.text(
+        data.drinks[0].strIngredient8 + " - " + data.drinks[0].strMeasure8
+      );
+      //Else the ingredient has a measurement value of null and set the list element text to just the ingredient name
+    } else {
+      ingredientSingle.text(data.drinks[0].strIngredient8);
+    }
+    ingredientsListOrdered.append(ingredientSingle);
+  }
+
+  // If the ingredient value in the data has a value then create a list element for that unique ingredient
+  if (data.drinks[0].strIngredient9 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
+
+    // If the ingredient has a measurement value then set the list element text to the ingredient name + the measurement
+    if (data.drinks[0].strMeasure9 !== null) {
+      ingredientSingle.text(
+        data.drinks[0].strIngredient9 + " - " + data.drinks[0].strMeasure9
+      );
+      //Else the ingredient has a measurement value of null and set the list element text to just the ingredient name
+    } else {
+      ingredientSingle.text(data.drinks[0].strIngredient9);
+    }
+    ingredientsListOrdered.append(ingredientSingle);
+  }
+
+  // If the ingredient value in the data has a value then create a list element for that unique ingredient
+  if (data.drinks[0].strIngredient10 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
+
+    // If the ingredient has a measurement value then set the list element text to the ingredient name + the measurement
+    if (data.drinks[0].strMeasure10 !== null) {
+      ingredientSingle.text(
+        data.drinks[0].strIngredient10 + " - " + data.drinks[0].strMeasure10
+      );
+      //Else the ingredient has a measurement value of null and set the list element text to just the ingredient name
+    } else {
+      ingredientSingle.text(data.drinks[0].strIngredient10);
+    }
+    ingredientsListOrdered.append(ingredientSingle);
+  }
+
+  // If the ingredient value in the data has a value then create a list element for that unique ingredient
+  if (data.drinks[0].strIngredient11 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
+
+    // If the ingredient has a measurement value then set the list element text to the ingredient name + the measurement
+    if (data.drinks[0].strMeasure11 !== null) {
+      ingredientSingle.text(
+        data.drinks[0].strIngredient11 + " - " + data.drinks[0].strMeasure11
+      );
+      //Else the ingredient has a measurement value of null and set the list element text to just the ingredient name
+    } else {
+      ingredientSingle.text(data.drinks[0].strIngredient11);
+    }
+    ingredientsListOrdered.append(ingredientSingle);
+  }
+
+  // If the ingredient value in the data has a value then create a list element for that unique ingredient
+  if (data.drinks[0].strIngredient12 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
+
+    // If the ingredient has a measurement value then set the list element text to the ingredient name + the measurement
+    if (data.drinks[0].strMeasure12 !== null) {
+      ingredientSingle.text(
+        data.drinks[0].strIngredient12 + " - " + data.drinks[0].strMeasure12
+      );
+      //Else the ingredient has a measurement value of null and set the list element text to just the ingredient name
+    } else {
+      ingredientSingle.text(data.drinks[0].strIngredient12);
+    }
+    ingredientsListOrdered.append(ingredientSingle);
+  }
+
+  // If the ingredient value in the data has a value then create a list element for that unique ingredient
+  if (data.drinks[0].strIngredient13 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
+
+    // If the ingredient has a measurement value then set the list element text to the ingredient name + the measurement
+    if (data.drinks[0].strMeasure13 !== null) {
+      ingredientSingle.text(
+        data.drinks[0].strIngredient13 + " - " + data.drinks[0].strMeasure13
+      );
+      //Else the ingredient has a measurement value of null and set the list element text to just the ingredient name
+    } else {
+      ingredientSingle.text(data.drinks[0].strIngredient13);
+    }
+    ingredientsListOrdered.append(ingredientSingle);
+  }
+
+  // If the ingredient value in the data has a value then create a list element for that unique ingredient
+  if (data.drinks[0].strIngredient14 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
+
+    // If the ingredient has a measurement value then set the list element text to the ingredient name + the measurement
+    if (data.drinks[0].strMeasure14 !== null) {
+      ingredientSingle.text(
+        data.drinks[0].strIngredient14 + " - " + data.drinks[0].strMeasure14
+      );
+      //Else the ingredient has a measurement value of null and set the list element text to just the ingredient name
+    } else {
+      ingredientSingle.text(data.drinks[0].strIngredient14);
+    }
+    ingredientsListOrdered.append(ingredientSingle);
+  }
+
+  // If the ingredient value in the data has a value then create a list element for that unique ingredient
+  if (data.drinks[0].strIngredient15 !== null) {
+    ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
+
+    // If the ingredient has a measurement value then set the list element text to the ingredient name + the measurement
+    if (data.drinks[0].strMeasure15 !== null) {
+      ingredientSingle.text(
+        data.drinks[0].strIngredient15 + " - " + data.drinks[0].strMeasure15
+      );
+      //Else the ingredient has a measurement value of null and set the list element text to just the ingredient name
+    } else {
+      ingredientSingle.text(data.drinks[0].strIngredient15);
+    }
+    ingredientsListOrdered.append(ingredientSingle);
+  }
+
+  // If the ingredient value in the data has a value then create a list element for that unique ingredient
+  var instructionsEl = $("#instructions");
+  instructionsEl.attr("class", "column instructions-column");
+  drinkContainerEl.append(instructionsEl);
+
+  // Set Ingredients Column
+  instructionsTitleEl = $("<div></div>");
+  instructionsEl.append(instructionsTitleEl);
+
+  instructionsTitleText = $("<h1></h1>");
+  instructionsTitleText.attr("class", "instructions-title");
+  instructionsTitleText.text("INSTRUCTIONS:");
+  instructionsTitleEl.append(instructionsTitleText);
+
+  instructionsSummaryEl = $("<p></p>");
+  instructionsSummaryEl.attr("class", "instructions-summary");
+  instructionsSummaryEl.text(data.drinks[0].strInstructions);
+  instructionsEl.append(instructionsSummaryEl);
 };
 
 $("#form-submit").on("click", getSpoonApi);
