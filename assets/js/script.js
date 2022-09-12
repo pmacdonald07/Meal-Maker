@@ -15,6 +15,7 @@ var arrApiKeys = [
   "2cb1ecb32f4e4eb9a46acc15da086c22",
   "abed78e3630b46feafb9672300be48cc",
   "fe6c2d84686842f9af715566ad95611d",
+  "d47220e0ade34b3ea9c039613858c695",
 ];
 
 // All Api Keys
@@ -192,16 +193,14 @@ var displayRecipeCards = function (data) {
     cardMoreInfoButton = $("<button></button>");
     cardMoreInfoButton.attr("class", "more-info card-footer-item button");
     cardMoreInfoButton.attr("id", "more-info");
-    cardMoreInfoButton.text("More Info");
+    cardMoreInfoButton.text("Favorite");
     cardButtonEl.append(cardMoreInfoButton);
 
     cardButtonIcon = $("<i></i>");
-    cardButtonIcon.attr("class", "fa-regular fa-book-bookmark");
+    cardButtonIcon.attr("class", "fa-regular fa-star");
     cardMoreInfoButton.append(cardButtonIcon);
 
     getId(data.results[i].id);
-
-    // console.log(data.searchResults[0].results[i].id);
   }
 
   //drag recipe cards
