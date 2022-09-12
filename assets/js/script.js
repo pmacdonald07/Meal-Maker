@@ -110,7 +110,10 @@ var displayRecipeCards = function (data) {
 
   // create row for forecast cards
   recipeContainerEl = $("<div></div");
-  recipeContainerEl.attr("class", "columns drag is-full-mobile is-centered");
+  recipeContainerEl.attr(
+    "class",
+    "columns drag is-full-mobile is-centered recipe-container"
+  );
   cardContainerEl.append(recipeContainerEl);
 
   function randomKey(arrApiKeys) {
@@ -239,10 +242,6 @@ var updateCardText = function (idCallResponse) {
   currentCard = $("cards").find($);
   cardContentEl.text(idCallResponse.readyInMinutes);
 };
-
-// var moreResults = function (event) {
-//   console.log(">>>>>>>", event);
-// };
 
 var checkID = function (data) {
   $(".recipe-card").each(function () {
