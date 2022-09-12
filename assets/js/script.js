@@ -7,10 +7,6 @@ var drinkContainerEl = $("#drink");
 var arrApiKeys = [
   "c39f000be15b48f0b51fc4215771d97b",
   "ad6278e15c864117bf13998d6f2409e0",
-  "d4e89512419b4ecfae9d762561d78c97",
-  "2cb1ecb32f4e4eb9a46acc15da086c22",
-  "abed78e3630b46feafb9672300be48cc",
-  "fe6c2d84686842f9af715566ad95611d",
 ];
 
 // All Api Keys
@@ -189,8 +185,6 @@ var displayRecipeCards = function (data) {
     cardMoreInfoButton.append(cardButtonIcon);
 
     getId(data.results[i].id);
-
-    // console.log(data.searchResults[0].results[i].id);
   }
 
   //drag recipe cards
