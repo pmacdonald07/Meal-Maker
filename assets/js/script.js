@@ -1,5 +1,8 @@
 var userInput = $("#user-form");
 var submitButton = $("#form-submit");
+var cardContainerEl = $("#cards");
+var drinkContainerEl = $("#drink");
+
 // An array of different apiKeys that will work in the fetch api call in the getSpoonApi function
 var arrApiKeys = [
   "c39f000be15b48f0b51fc4215771d97b",
@@ -20,9 +23,6 @@ var arrApiKeys = [
 //   "fe6c2d84686842f9af715566ad95611d",
 //   "d47220e0ade34b3ea9c039613858c695"
 // ];
-
-var cardContainerEl = $("#cards");
-var drinkContainerEl = $("#drink");
 
 var getSpoonApi = function (event) {
   event.preventDefault();
@@ -108,11 +108,10 @@ var displayRecipeCards = function (data) {
   moreResultsButton.text("Display Different Recipes");
   boxDisplayEl.append(moreResultsButton);
 
-  // create row for forecast cards
   recipeContainerEl = $("<div></div");
   recipeContainerEl.attr(
     "class",
-    "columns drag is-full-mobile is-centered recipe-container"
+    "columns drag is-flex-tablet is-block-mobile is-justify-content-space-between is-flex-wrap-wrap recipe-container"
   );
   cardContainerEl.append(recipeContainerEl);
 
@@ -125,7 +124,7 @@ var displayRecipeCards = function (data) {
     recipeCardEl = $("<div></div");
     recipeCardEl.attr(
       "class",
-      "card column recipe-card is-half-mobile mx-small"
+      "card column is-10-mobile mx-auto is-5-tablet is-2-desktop recipe-card my-4"
     );
     recipeCardEl.attr("id", data.results[i].id);
     recipeContainerEl.append(recipeCardEl);
@@ -295,7 +294,10 @@ var displayDrinks = function (data) {
   console.log("DRINKS", data);
 
   $("#drink").text("");
-  drinkContainerEl.attr("class", "drink-section box drink-column columns");
+  drinkContainerEl.attr(
+    "class",
+    "drink-section box is-flex is-flex-wrap-wrap drink-column columns container"
+  );
   cardContainerEl.append(drinkContainerEl);
 
   recipeCardEl = $("<div></div");
