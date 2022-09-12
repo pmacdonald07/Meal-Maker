@@ -135,7 +135,7 @@ var displayRecipeCards = function (data) {
     recipeCardEl = $("<div></div");
     recipeCardEl.attr(
       "class",
-      "card column is-10-mobile mx-auto is-5-tablet is-2-desktop recipe-card my-4"
+      "card column is-10-mobile mx-auto is-5-tablet is-4-desktop is-2-widescreen recipe-card my-4"
     );
     recipeCardEl.attr("id", data.results[i].id);
     recipeContainerEl.append(recipeCardEl);
