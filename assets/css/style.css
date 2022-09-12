@@ -138,6 +138,11 @@ body {
     justify-content: space-evenly;
 }
 
+.drink-recipe {
+    min-height: 200px;
+    min-width: 200px;
+}
+
 .drink-title {
    background-color: white;
    border-radius: 5px;
@@ -147,7 +152,7 @@ body {
     display: flex;
     flex-direction: column;
     text-align: left;
-    margin-left: 50px;
+    /* margin-left: 50px; */
     background-color: rgba(228, 218, 218, 0.703);
 }
 
@@ -155,6 +160,7 @@ body {
     text-align: center;
     font-size: 32px;
     background-color: rgba(0, 255, 21, 0.4);
+    margin-bottom: 15px;
 }
 
 .ingredients {
@@ -164,7 +170,8 @@ body {
 }
 
 .single-ingredient {
-    color: blue;
+    color: darkgreen;
+    margin-left: 20px;
 }
 
 .instructions-column {
@@ -177,10 +184,12 @@ body {
     text-align: center;
     font-size: 32px;
     background-color: rgba(250, 72, 104, 0.4);
+    margin-bottom: 15px;
 }
 
 .instructions-summary {
-    text-align: center;
+    text-align: justify;
     line-height: 1.7rem;
     font-size: 18px;
+    color: darkred;
 }
