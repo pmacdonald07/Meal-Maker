@@ -178,16 +178,16 @@ var displayRecipeCards = function (data) {
     cardButtonEl.attr("class", "card-footer");
     recipeCardEl.append(cardButtonEl);
 
-    // create the favorite button on each recipe card
-    cardFavoriteButton = $("<button></button>");
-    cardFavoriteButton.attr("class", "favorite card-footer-item button");
-    cardFavoriteButton.attr("id", "favorite");
-    cardFavoriteButton.text("Favorite");
-    cardButtonEl.append(cardFavoriteButton);
+    // create the more info button on each recipe card
+    cardMoreInfoButton = $("<button></button>");
+    cardMoreInfoButton.attr("class", "more-info card-footer-item button");
+    cardMoreInfoButton.attr("id", "more-info");
+    cardMoreInfoButton.text("More Info");
+    cardButtonEl.append(cardMoreInfoButton);
 
     cardButtonIcon = $("<i></i>");
-    cardButtonIcon.attr("class", "fa-regular fa-star");
-    cardFavoriteButton.append(cardButtonIcon);
+    cardButtonIcon.attr("class", "fa-regular fa-book-bookmark");
+    cardMoreInfoButton.append(cardButtonIcon);
 
     getId(data.results[i].id);
 
