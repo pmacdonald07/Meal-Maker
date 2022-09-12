@@ -3,6 +3,10 @@ var submitButton = $("#form-submit");
 var cardContainerEl = $("#cards");
 var drinkContainerEl = $("#drink");
 
+const inputErrorModalEl = document.getElementById("input-error-modal");
+const dataNotFoundModalEl = document.getElementById("data-not-found-modal");
+const cannotConnectModalEl = document.getElementById("cannot-connect-modal");
+
 // An array of different apiKeys that will work in the fetch api call in the getSpoonApi function
 var arrApiKeys = [
   "c39f000be15b48f0b51fc4215771d97b",
@@ -37,6 +41,11 @@ var getSpoonApi = function (event) {
   // Converts the user's input into a value the apiUrl will be able to read
   var userText = document.querySelector(".input");
   var input = userText.value.trim();
+
+  if (input === undefined || input === "") {
+    inputErrorModalEl.classList.add("is-active");
+    return;
+  }
 
   // Chooses an apiKey at random from the arrApiKeys to be used in the fetch api call
   function randomKey(arrApiKeys) {
@@ -75,11 +84,13 @@ var getSpoonApi = function (event) {
           displayRecipeCards(data);
         });
       } else {
-        alert("Error: Data Not Found!");
+        dataNotFoundModalEl.classList.add("is-active");
+        return;
       }
     })
     .catch(function (error) {
-      alert("Unable to connect to the Spoonacular Api");
+      cannotConnectModalEl.classList.add("is-active");
+      return;
     });
 };
 
@@ -229,11 +240,13 @@ var getId = function (id) {
           checkID(data);
         });
       } else {
-        alert("Error: Data Not Found!");
+        dataNotFoundModalEl.classList.add("is-active");
+        return;
       }
     })
     .catch(function (error) {
-      alert("Unable to connect to the Spoonacular Api");
+      cannotConnectModalEl.classList.add("is-active");
+      return;
     });
 };
 
@@ -282,11 +295,13 @@ var getDrinks = function () {
           displayDrinks(data);
         });
       } else {
-        alert("Error: Data Not Found!");
+        dataNotFoundModalEl.classList.add("is-active");
+        return;
       }
     })
     .catch(function (error) {
-      alert("Unable to connect to the CocktailDB Api");
+      cannotConnectModalEl.classList.add("is-active");
+      return;
     });
 };
 
@@ -626,6 +641,37 @@ var displayDrinks = function (data) {
   instructionsEl.append(instructionsSummaryEl);
 };
 
-$("#form-submit").on("click", getSpoonApi);
+var closeInputModal = function () {
+  inputErrorModalEl.classList.remove("is-active");
+};
 
-// $("#more-results").on("click", moreResults);
+var closeDataModal = function () {
+  dataNotFoundModalEl.classList.remove("is-active");
+};
+
+var closeApiModal = function () {
+  cannotConnectModalEl.classList.remove("is-active");
+};
+
+document
+  .querySelector("#input-modal-close-btn")
+  .addEventListener("click", closeInputModal);
+document
+  .querySelector("#input-modal-bg")
+  .addEventListener("click", closeInputModal);
+
+document
+  .querySelector("#data-modal-bg")
+  .addEventListener("click", closeDataModal);
+document
+  .querySelector("#data-modal-close-btn")
+  .addEventListener("click", closeDataModal);
+
+document
+  .querySelector("#cannot-connect-bg")
+  .addEventListener("click", closeApiModal);
+document
+  .querySelector("#cannot-connect-close-btn")
+  .addEventListener("click", closeApiModal);
+
+$("#form-submit").on("click", getSpoonApi);
