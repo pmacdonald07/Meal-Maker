@@ -2,8 +2,12 @@ var userInput = $("#user-form");
 var submitButton = $("#form-submit");
 // An array of different apiKeys that will work in the fetch api call in the getSpoonApi function
 var arrApiKeys = [
+  "c39f000be15b48f0b51fc4215771d97b",
   "ad6278e15c864117bf13998d6f2409e0",
-  "d47220e0ade34b3ea9c039613858c695",
+  "d4e89512419b4ecfae9d762561d78c97",
+  "2cb1ecb32f4e4eb9a46acc15da086c22",
+  "abed78e3630b46feafb9672300be48cc",
+  "fe6c2d84686842f9af715566ad95611d",
 ];
 
 // All Api Keys
@@ -292,7 +296,7 @@ var displayDrinks = function (data) {
   console.log("DRINKS", data);
 
   $("#drink").text("");
-  drinkContainerEl.attr("class", "box drink-column columns");
+  drinkContainerEl.attr("class", "drink-section box drink-column columns");
   cardContainerEl.append(drinkContainerEl);
 
   recipeCardEl = $("<div></div");
@@ -327,38 +331,35 @@ var displayDrinks = function (data) {
   cardTitleText.text(data.drinks[0].strDrink);
   cardTitleEl.append(cardTitleText);
 
-  var ingredientsEl = $("#ingredients");
-  ingredientsEl.attr("class", "column");
-  drinkContainerEl.append(ingredientsEl);
-
   // Set Ingredients Column
-  ingredientsTitleEl = $("<div></div>");
-  ingredientsEl.append(ingredientsTitleEl);
+  var ingredientsEl = $("#ingredients");
+  ingredientsEl.attr("class", "column ingredients-column");
+  drinkContainerEl.append(ingredientsEl);
 
   ingredientsTitleText = $("<h1></h1>");
   ingredientsTitleText.attr("class", "ingredients-title");
-  ingredientsTitleEl.text("Ingredients:");
-  ingredientsTitleEl.append(ingredientsTitleText);
+  ingredientsTitleText.text("INGREDIENTS:");
+  ingredientsEl.append(ingredientsTitleText);
 
   ingredientsListEl = $("<div></div>");
   ingredientsEl.append(ingredientsListEl);
 
   ingredientsListOrdered = $("<ol></ol>");
+  ingredientsListOrdered.attr("class", "ingredients");
   ingredientsListEl.append(ingredientsListOrdered);
 
   if (data.drinks[0].strIngredient1 !== null) {
-    console.log("NOT NULL");
     ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
     ingredientSingle.text(
       data.drinks[0].strIngredient1 + " - " + data.drinks[0].strMeasure1
     );
     ingredientsListOrdered.append(ingredientSingle);
-  } else {
-    console.log("IT IS NULL");
   }
 
   if (data.drinks[0].strIngredient2 !== null) {
     ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
     ingredientSingle.text(
       data.drinks[0].strIngredient2 + " - " + data.drinks[0].strMeasure2
     );
@@ -367,6 +368,7 @@ var displayDrinks = function (data) {
 
   if (data.drinks[0].strIngredient3 !== null) {
     ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
     ingredientSingle.text(
       data.drinks[0].strIngredient3 + " - " + data.drinks[0].strMeasure3
     );
@@ -375,6 +377,7 @@ var displayDrinks = function (data) {
 
   if (data.drinks[0].strIngredient4 !== null) {
     ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
     ingredientSingle.text(
       data.drinks[0].strIngredient4 + " - " + data.drinks[0].strMeasure4
     );
@@ -383,6 +386,7 @@ var displayDrinks = function (data) {
 
   if (data.drinks[0].strIngredient5 !== null) {
     ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
     ingredientSingle.text(
       data.drinks[0].strIngredient5 + " - " + data.drinks[0].strMeasure5
     );
@@ -391,6 +395,7 @@ var displayDrinks = function (data) {
 
   if (data.drinks[0].strIngredient6 !== null) {
     ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
     ingredientSingle.text(
       data.drinks[0].strIngredient6 + " - " + data.drinks[0].strMeasure6
     );
@@ -399,6 +404,7 @@ var displayDrinks = function (data) {
 
   if (data.drinks[0].strIngredient6 !== null) {
     ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
     ingredientSingle.text(
       data.drinks[0].strIngredient7 + " - " + data.drinks[0].strMeasure7
     );
@@ -407,6 +413,7 @@ var displayDrinks = function (data) {
 
   if (data.drinks[0].strIngredient8 !== null) {
     ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
     ingredientSingle.text(
       data.drinks[0].strIngredient8 + " - " + data.drinks[0].strMeasure8
     );
@@ -415,6 +422,7 @@ var displayDrinks = function (data) {
 
   if (data.drinks[0].strIngredient9 !== null) {
     ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
     ingredientSingle.text(
       data.drinks[0].strIngredient9 + " - " + data.drinks[0].strMeasure9
     );
@@ -423,6 +431,7 @@ var displayDrinks = function (data) {
 
   if (data.drinks[0].strIngredient10 !== null) {
     ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
     ingredientSingle.text(
       data.drinks[0].strIngredient10 + " - " + data.drinks[0].strMeasure10
     );
@@ -431,6 +440,7 @@ var displayDrinks = function (data) {
 
   if (data.drinks[0].strIngredient11 !== null) {
     ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
     ingredientSingle.text(
       data.drinks[0].strIngredient11 + " - " + data.drinks[0].strMeasure11
     );
@@ -439,6 +449,7 @@ var displayDrinks = function (data) {
 
   if (data.drinks[0].strIngredient12 !== null) {
     ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
     ingredientSingle.text(
       data.drinks[0].strIngredient12 + " - " + data.drinks[0].strMeasure12
     );
@@ -447,6 +458,7 @@ var displayDrinks = function (data) {
 
   if (data.drinks[0].strIngredient13 !== null) {
     ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
     ingredientSingle.text(
       data.drinks[0].strIngredient13 + " - " + data.drinks[0].strMeasure13
     );
@@ -455,6 +467,7 @@ var displayDrinks = function (data) {
 
   if (data.drinks[0].strIngredient14 !== null) {
     ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
     ingredientSingle.text(
       data.drinks[0].strIngredient14 + " - " + data.drinks[0].strMeasure14
     );
@@ -463,6 +476,7 @@ var displayDrinks = function (data) {
 
   if (data.drinks[0].strIngredient15 !== null) {
     ingredientSingle = $("<li></li>");
+    ingredientSingle.attr("class", "single-ingredient");
     ingredientSingle.text(
       data.drinks[0].strIngredient15 + " - " + data.drinks[0].strMeasure15
     );
@@ -470,7 +484,7 @@ var displayDrinks = function (data) {
   }
 
   var instructionsEl = $("#instructions");
-  instructionsEl.attr("class", "column");
+  instructionsEl.attr("class", "column instructions-column");
   drinkContainerEl.append(instructionsEl);
 
   // Set Ingredients Column
@@ -479,13 +493,13 @@ var displayDrinks = function (data) {
 
   instructionsTitleText = $("<h1></h1>");
   instructionsTitleText.attr("class", "instructions-title");
-  instructionsTitleEl.text("Instructions:");
+  instructionsTitleText.text("INSTRUCTIONS:");
   instructionsTitleEl.append(instructionsTitleText);
 
   instructionsSummaryEl = $("<p></p>");
   instructionsSummaryEl.attr("class", "instructions-summary");
   instructionsSummaryEl.text(data.drinks[0].strInstructions);
-  instructionsTitleText.append(instructionsSummaryEl);
+  instructionsEl.append(instructionsSummaryEl);
 };
 
 $("#form-submit").on("click", getSpoonApi);
