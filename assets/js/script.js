@@ -6,6 +6,7 @@ var drinkContainerEl = $("#drink");
 const inputErrorModalEl = document.getElementById("input-error-modal");
 const dataNotFoundModalEl = document.getElementById("data-not-found-modal");
 const cannotConnectModalEl = document.getElementById("cannot-connect-modal");
+let currentSearch = "";
 
 // An array of different apiKeys that will work in the fetch api call in the getSpoonApi function
 var arrApiKeys = [
@@ -15,6 +16,7 @@ var arrApiKeys = [
   "2cb1ecb32f4e4eb9a46acc15da086c22",
   "abed78e3630b46feafb9672300be48cc",
   "fe6c2d84686842f9af715566ad95611d",
+  "d47220e0ade34b3ea9c039613858c695",
 ];
 
 // All Api Keys
@@ -39,8 +41,10 @@ var getSpoonApi = function (event) {
   };
 
   // Converts the user's input into a value the apiUrl will be able to read
+
   var userText = document.querySelector(".input");
   var input = userText.value.trim();
+  currentSearch = input;
 
   if (input === undefined || input === "") {
     inputErrorModalEl.classList.add("is-active");
@@ -108,16 +112,10 @@ var displayRecipeCards = function (data) {
   resultsTextHeader.attr("class", "results-text-header");
   resultsTextHeader.text(
     'Here are some recipes we found based off of your search for:  "' +
-      data.query +
-      '"'
+      currentSearch +
+      '." Click the recipe image to see full recipe details.'
   );
   boxDisplayEl.append(resultsTextHeader);
-
-  var moreResultsButton = $("<button></button>");
-  moreResultsButton.attr("class", "more-results-button button");
-  moreResultsButton.attr("id", "more-results");
-  moreResultsButton.text("Display Different Recipes");
-  boxDisplayEl.append(moreResultsButton);
 
   recipeContainerEl = $("<div></div");
   recipeContainerEl.attr(
@@ -192,16 +190,14 @@ var displayRecipeCards = function (data) {
     cardMoreInfoButton = $("<button></button>");
     cardMoreInfoButton.attr("class", "more-info card-footer-item button");
     cardMoreInfoButton.attr("id", "more-info");
-    cardMoreInfoButton.text("More Info");
+    cardMoreInfoButton.text("Favorite");
     cardButtonEl.append(cardMoreInfoButton);
 
     cardButtonIcon = $("<i></i>");
-    cardButtonIcon.attr("class", "fa-regular fa-book-bookmark");
+    cardButtonIcon.attr("class", "fa-regular fa-star");
     cardMoreInfoButton.append(cardButtonIcon);
 
     getId(data.results[i].id);
-
-    // console.log(data.searchResults[0].results[i].id);
   }
 
   //drag recipe cards
@@ -273,7 +269,10 @@ var checkID = function (data) {
             " min" +
             "<br>" +
             "Servings: " +
-            data.servings
+            data.servings +
+            "<br>" +
+            "Source: " +
+            data.sourceName
         );
     } else {
     }
