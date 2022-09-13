@@ -31,6 +31,10 @@ body {
     margin: 20px;
 }
 
+.submit {
+    margin-top: 10px;
+}
+
 .fav-recipe-box {
     background-color: rgba(234, 255, 0, 0.5);
     *max-width: 400px;
