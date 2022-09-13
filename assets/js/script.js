@@ -211,8 +211,15 @@ var displayRecipeCards = function (data) {
   };
   Draggable();
 
+$('#drop').droppable({
+  drop:function (ui,event) {
+    $(this).attr("is-4-desktop", "").addClass($("#fav").attr('chicken'));
+  }
+});
+
   checkDrinks();
 };
+
 
 var getId = function (id) {
   const options = {
