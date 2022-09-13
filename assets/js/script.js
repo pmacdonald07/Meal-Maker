@@ -179,7 +179,17 @@ var displayRecipeCards = function (data) {
     // set card content
     cardContentEl = $("<p></p>");
     cardContentEl.attr("class", "content");
-    cardContentEl.text(data.results[i].title);
+    cardContentEl.html(
+      "Ready in " +
+        data.results[i].readyInMinutes +
+        " min" +
+        "<br>" +
+        "Servings: " +
+        data.results[i].servings +
+        "<br>" +
+        "Source: " +
+        data.results[i].sourceName
+    );
     cardBodyEl.append(cardContentEl);
     cardContainerEl.append(recipeContainerEl);
 
@@ -198,8 +208,6 @@ var displayRecipeCards = function (data) {
     cardButtonIcon = $("<i></i>");
     cardButtonIcon.attr("class", "fa-regular fa-star");
     cardMoreInfoButton.append(cardButtonIcon);
-
-    getId(data.results[i].id);
   }
 
   //drag recipe cards
@@ -212,66 +220,9 @@ var displayRecipeCards = function (data) {
   checkDrinks();
 };
 
-var getId = function (id) {
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "35f49090e6msha1612b0ea8a9d7fp14fe6djsn164414318e8d",
-      "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-    },
-  };
-
-  function randomKey(arrApiKeys) {
-    return arrApiKeys[Math.floor(Math.random() * arrApiKeys.length)];
-  }
-
-  var apiUrl =
-    "https://api.spoonacular.com/recipes/" +
-    id +
-    "/information?includeNutrition=false&apiKey=" +
-    randomKey(arrApiKeys);
-
-  fetch(apiUrl)
-    .then(function (response) {
-      if (response.ok) {
-        response.json().then(function (data) {
-          checkID(data);
-        });
-      } else {
-        dataNotFoundModalEl.classList.add("is-active");
-        return;
-      }
-    })
-    .catch(function (error) {
-      cannotConnectModalEl.classList.add("is-active");
-      return;
-    });
-};
-
 var updateCardText = function (idCallResponse) {
   currentCard = $("cards").find($);
   cardContentEl.text(idCallResponse.readyInMinutes);
-};
-
-var checkID = function (data) {
-  $(".recipe-card").each(function () {
-    if (data.id == $(this).attr("id")) {
-      $(this)
-        .find("p")
-        .html(
-          "Ready in " +
-            data.readyInMinutes +
-            " min" +
-            "<br>" +
-            "Servings: " +
-            data.servings +
-            "<br>" +
-            "Source: " +
-            data.sourceName
-        );
-    } else {
-    }
-  });
 };
 
 // Function checks if the drink checkbox is true
