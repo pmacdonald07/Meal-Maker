@@ -73,6 +73,10 @@ var getSpoonApi = function (event) {
     dietParameter = dietParameter + "gluten free";
   }
 
+  if (document.getElementById("no-diet").checked === true) {
+    dietParameter = dietParameter;
+  }
+
   var apiUrl =
     "https://api.spoonacular.com/recipes/complexSearch?query=" +
     input +
