@@ -262,7 +262,10 @@ var checkID = function (data) {
             " min" +
             "<br>" +
             "Servings: " +
-            data.servings
+            data.servings +
+            "<br>" +
+            "Source: " +
+            data.sourceName
         );
     } else {
     }
