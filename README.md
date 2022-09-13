@@ -47,7 +47,7 @@ This project has served as an excellent opportunity for each of us to practice o
 
 # Application Screenshot
 
-    ![Meal-Maker](https://user-images.githubusercontent.com/108894754/189998107-a1d4a3a2-d67a-4e49-b123-3a8bbbdfd06a.png)
+![Meal-Maker](https://user-images.githubusercontent.com/108894754/189998107-a1d4a3a2-d67a-4e49-b123-3a8bbbdfd06a.png)
 
 # Application Repository Link and Deployed Application Link
 
