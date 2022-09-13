@@ -115,8 +115,6 @@ var getSpoonApi = function (event) {
 var displayRecipeCards = function (data) {
   $("#search-input").val("");
   $("#cards").empty();
-  $("#ingredients").empty();
-  $("#instructions").empty();
   var boxDisplayEl = $("<div></div");
   boxDisplayEl.attr("class", "box more-results-container");
   boxDisplayEl.attr("id", "box");
@@ -272,7 +270,8 @@ var getDrinks = function () {
 var displayDrinks = function (data) {
   console.log("DRINKS", data);
 
-  $("#drink").text("");
+  $("#drinks").empty();
+
   drinkContainerEl.attr(
     "class",
     "drink-section box is-flex is-flex-wrap-wrap drink-column columns container"
@@ -313,6 +312,7 @@ var displayDrinks = function (data) {
 
   // Set Ingredients Column
   var ingredientsEl = $("#ingredients");
+  ingredientsEl.empty();
   ingredientsEl.attr("class", "column ingredients-column");
   drinkContainerEl.append(ingredientsEl);
 
@@ -545,6 +545,7 @@ var displayDrinks = function (data) {
 
   // If the ingredient value in the data has a value then create a list element for that unique ingredient
   var instructionsEl = $("#instructions");
+  instructionsEl.empty();
   instructionsEl.attr("class", "column instructions-column");
   drinkContainerEl.append(instructionsEl);
 
