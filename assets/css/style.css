@@ -221,3 +221,13 @@ body {
     font-size: 18px;
     color: darkred;
 }
+
+@media screen and (max-width: 542px) {
+    .drink-section {
+        display: flex;
+        justify-content: space-evenly;
+        width: fit-content;
+        align-self: center;
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+}
