@@ -222,38 +222,12 @@ body {
     color: darkred;
 }
 
-/* @media screen and (max-width: 540px) {
+@media screen and (max-width: 542px) {
     .drink-section {
         display: flex;
         justify-content: space-evenly;
-        min-width: 500px;
+        width: fit-content;
         align-self: center;
+        background-color: rgba(255, 255, 255, 0.8);
     }
-
-    .drink-recipe {
-        width: 33%;
-    }
-
-    .ingredients-column {
-        width: 33%;
-    }
-
-    .instructions-column {
-        width: 33%;
-    }
-} */
-
-/* @media screen and (max-width: 400px) {
-    body {
-        width: min-content;
-    }
-
-    .recipe-container {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .recipe-card {
-        width: 100%;
-    }
-} */
+}
