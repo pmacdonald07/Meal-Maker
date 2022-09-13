@@ -5,6 +5,7 @@ var drinkContainerEl = $("#drink");
 var drinkInfoContainerEl = $("#drink-info");
 
 const inputErrorModalEl = document.getElementById("input-error-modal");
+const inputNoRecipesModalEl = document.getElementById("input-no-recipes-modal");
 const dataNotFoundModalEl = document.getElementById("data-not-found-modal");
 const cannotConnectModalEl = document.getElementById("cannot-connect-modal");
 let currentSearch = "";
@@ -86,6 +87,13 @@ var getSpoonApi = function (event) {
         response.json().then(function (data) {
           console.log(data);
           console.log(apiUrl);
+
+          if (data.results.length === 0) {
+            inputNoRecipesModalEl.classList.add("is-active");
+            $("#search-input").val("");
+            return;
+          }
+
           displayRecipeCards(data);
         });
       } else {
@@ -555,6 +563,10 @@ var closeInputModal = function () {
   inputErrorModalEl.classList.remove("is-active");
 };
 
+var noData = function () {
+  inputNoRecipesModalEl.classList.remove("is-active");
+};
+
 var closeDataModal = function () {
   dataNotFoundModalEl.classList.remove("is-active");
 };
@@ -566,6 +578,9 @@ var closeApiModal = function () {
 document
   .querySelector("#input-modal-close-btn")
   .addEventListener("click", closeInputModal);
+document
+  .querySelector("#input-modal-close-btn-2")
+  .addEventListener("click", noData);
 document
   .querySelector("#input-modal-bg")
   .addEventListener("click", closeInputModal);
