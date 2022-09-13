@@ -2,7 +2,7 @@
 
 UNC Coding Bootcamp: Project One.
 
-The goal of this project was combine all of the skills we have gathered so far in our Coding Bootcamp course and collaborate with our classmates to create an application using Agile development practices. We designed this project from the ground up, creating the idea together and distributing responsibilities based on our individual strengths.
+The goal of this project was to combine all of the skills we have gathered so far in our Coding Bootcamp course and collaborate with our classmates to create an application using Agile development practices. We designed this project from the ground up, creating the idea together and distributing responsibilities based on our individual strengths.
 This application, called "Meal Maker," uses server side APIs to generate food and drink recipes based on user input. The current live application reflects the MVP (Minimum Viable Product) for Meal Maker.
 
 # Project Collaborators:
@@ -31,7 +31,8 @@ Our application functions by taking user search criteria, including diet restric
 # Plans for Future Development:
 
 There were a number of features we wanted to add to our application but could not due to either time constraints or limitations of each server side API. We hope that we can revisit these features, or even collaborate with other developers to truly make Meal Maker shine. Some of our future goals include:
-Giving the user the option to generate a new set of recipe options based on the same criteria.
+
+    Giving the user the option to generate a new set of recipe options based on the same criteria.
 
     Utilizing drag and drop functionality to allow users to drag recipes they like into a "Favorite Recipes" column. These recipes would be saved into local storage and cards would automatically generate upon refreshing the page.
 
