@@ -2,6 +2,7 @@ var userInput = $("#user-form");
 var submitButton = $("#form-submit");
 var cardContainerEl = $("#cards");
 var drinkContainerEl = $("#drink");
+var drinkInfoContainerEl = $("#drink-info");
 
 const inputErrorModalEl = document.getElementById("input-error-modal");
 const dataNotFoundModalEl = document.getElementById("data-not-found-modal");
@@ -44,7 +45,7 @@ var getSpoonApi = function (event) {
 
   var userText = document.querySelector(".input");
   var input = userText.value.trim();
-  currentSearch = input;
+  currentSearch = input.toUpperCase();
 
   if (input === undefined || input === "") {
     inputErrorModalEl.classList.add("is-active");
@@ -101,8 +102,9 @@ var getSpoonApi = function (event) {
 // this function needs to have response from the API call as a parameter
 var displayRecipeCards = function (data) {
   $("#search-input").val("");
-  $("#drink").text("");
-  $("#cards").text("");
+  $("#cards").empty();
+  $("#ingredients").empty();
+  $("#instructions").empty();
   var boxDisplayEl = $("<div></div");
   boxDisplayEl.attr("class", "box more-results-container");
   boxDisplayEl.attr("id", "box");

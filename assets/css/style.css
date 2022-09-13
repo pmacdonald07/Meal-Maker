@@ -37,6 +37,7 @@ body {
     text-align: center;
     justify-content: center;
     display: flex;
+    min-width: 210px !important;
 }
 
 .fav-recipe-header {
@@ -83,6 +84,8 @@ body {
     flex-direction: column;
     justify-content: space-between;
     background-color: rgba(216, 245, 255, 0.921);
+    min-width: 200px !important;
+    min-height: 400px !important;
 }
 
 .recipe-card:hover {
