@@ -158,13 +158,8 @@ body {
     margin-top: 210px;
 }
 
-#drink {
-    width: 100%;
-}
-
 .drink-section {
     margin: 25px 2px 0px 2px;
-    display: flex;
 }
 
 .drink-recipe {
@@ -227,6 +222,6 @@ body {
     color: darkred;
 }
 
-@media screen {
+@media {
     
 }
