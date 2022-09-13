@@ -45,7 +45,7 @@ var getSpoonApi = function (event) {
 
   var userText = document.querySelector(".input");
   var input = userText.value.trim();
-  currentSearch = input;
+  currentSearch = input.toUpperCase();
 
   if (input === undefined || input === "") {
     inputErrorModalEl.classList.add("is-active");
