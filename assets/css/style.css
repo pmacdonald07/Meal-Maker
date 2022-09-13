@@ -115,7 +115,7 @@ body {
     border: none;
 }
 
-.more-info {
+.favorite {
     display: flex;
     /* Spaces the "more info" text and the book icon */
     justify-content: space-evenly;
@@ -131,7 +131,7 @@ body {
     height: 100%;
 }
 
-.more-info:hover {
+.favorite :hover {
     background-color: rgb(0, 169, 203);
     color: yellow;
 }

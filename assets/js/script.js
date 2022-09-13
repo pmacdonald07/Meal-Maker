@@ -3,6 +3,7 @@ var submitButton = $("#form-submit");
 var cardContainerEl = $("#cards");
 var drinkContainerEl = $("#drink");
 var drinkInfoContainerEl = $("#drink-info");
+var favButton = $(".favorite");
 
 const inputErrorModalEl = document.getElementById("input-error-modal");
 const dataNotFoundModalEl = document.getElementById("data-not-found-modal");
@@ -105,6 +106,7 @@ var displayRecipeCards = function (data) {
   $("#cards").empty();
   $("#ingredients").empty();
   $("#instructions").empty();
+
   var boxDisplayEl = $("<div></div");
   boxDisplayEl.attr("class", "box more-results-container");
   boxDisplayEl.attr("id", "box");
@@ -199,15 +201,14 @@ var displayRecipeCards = function (data) {
     recipeCardEl.append(cardButtonEl);
 
     // create the more info button on each recipe card
-    cardMoreInfoButton = $("<button></button>");
-    cardMoreInfoButton.attr("class", "more-info card-footer-item button");
-    cardMoreInfoButton.attr("id", "more-info");
-    cardMoreInfoButton.text("Favorite");
-    cardButtonEl.append(cardMoreInfoButton);
+    cardFavoriteButton = $("<button></button>");
+    cardFavoriteButton.attr("class", "favorite card-footer-item button");
+    cardFavoriteButton.text("Favorite");
+    cardButtonEl.append(cardFavoriteButton);
 
     cardButtonIcon = $("<i></i>");
     cardButtonIcon.attr("class", "fa-regular fa-star");
-    cardMoreInfoButton.append(cardButtonIcon);
+    cardFavoriteButton.append(cardButtonIcon);
   }
 
   //drag recipe cards
@@ -605,6 +606,10 @@ var closeApiModal = function () {
   cannotConnectModalEl.classList.remove("is-active");
 };
 
+var favButton = function () {
+  console.log($(this).parent(".card"));
+};
+
 document
   .querySelector("#input-modal-close-btn")
   .addEventListener("click", closeInputModal);
@@ -627,3 +632,4 @@ document
   .addEventListener("click", closeApiModal);
 
 $("#form-submit").on("click", getSpoonApi);
+$(favButton).on("click", favButton);
