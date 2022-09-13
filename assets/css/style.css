@@ -37,6 +37,7 @@ body {
     text-align: center;
     justify-content: center;
     display: flex;
+    min-width: 210px !important;
 }
 .fav-recipe-header {
     font-size: 32px;
@@ -54,6 +55,7 @@ body {
     padding: 5px;
     font-weight: bold;
     font-size: 20px;
+    font-family: 'Noto Serif', serif;
 }
 
 .more-results-button {
@@ -82,6 +84,8 @@ body {
     flex-direction: column;
     justify-content: space-between;
     background-color: rgba(216, 245, 255, 0.921);
+    min-width: 200px !important;
+    min-height: 400px !important;
 }
 
 .recipe-card:hover {
@@ -140,10 +144,10 @@ body {
     padding-left: 0;
 }
 
-/*.recipe-card {
-    max-width: 300px;
+.recipe-card {
+    min-width: 300px;
     max-height: 500px;
-} */
+}
 
 #welcome {
     font-family: 'Sacramento', cursive;
@@ -216,7 +220,4 @@ body {
     line-height: 1.7rem;
     font-size: 18px;
     color: darkred;
-}
-.chicken {
-background-color: aqua;
 }

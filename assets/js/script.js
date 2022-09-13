@@ -44,7 +44,7 @@ var getSpoonApi = function (event) {
 
   var userText = document.querySelector(".input");
   var input = userText.value.trim();
-  currentSearch = input;
+  currentSearch = input.toUpperCase();
 
   if (input === undefined || input === "") {
     inputErrorModalEl.classList.add("is-active");
@@ -207,15 +207,8 @@ var displayRecipeCards = function (data) {
   };
   Draggable();
 
-$('#drop').droppable({
-  drop:function (ui,event) {
-    $(this).attr("is-4-desktop", "").addClass($("#fav").attr('chicken'));
-  }
-});
-
   checkDrinks();
 };
-
 
 var getId = function (id) {
   const options = {
