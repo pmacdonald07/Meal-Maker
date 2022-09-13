@@ -179,7 +179,17 @@ var displayRecipeCards = function (data) {
     // set card content
     cardContentEl = $("<p></p>");
     cardContentEl.attr("class", "content");
-    cardContentEl.text(data.results[i].title);
+    cardContentEl.html(
+      "Ready in " +
+        data.results[i].readyInMinutes +
+        " min" +
+        "<br>" +
+        "Servings: " +
+        data.results[i].servings +
+        "<br>" +
+        "Source: " +
+        data.results[i].sourceName
+    );
     cardBodyEl.append(cardContentEl);
     cardContainerEl.append(recipeContainerEl);
 
@@ -199,7 +209,7 @@ var displayRecipeCards = function (data) {
     cardButtonIcon.attr("class", "fa-regular fa-star");
     cardMoreInfoButton.append(cardButtonIcon);
 
-    getId(data.results[i].id);
+    //getId(data.results[i].id);
   }
 
   //drag recipe cards
@@ -260,14 +270,14 @@ var checkID = function (data) {
         .find("p")
         .html(
           "Ready in " +
-            data.readyInMinutes +
+            data[i].readyInMinutes +
             " min" +
             "<br>" +
             "Servings: " +
-            data.servings +
+            data[i].servings +
             "<br>" +
             "Source: " +
-            data.sourceName
+            data[i].sourceName
         );
     } else {
     }
