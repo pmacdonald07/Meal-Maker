@@ -6,6 +6,7 @@ var drinkContainerEl = $("#drink");
 const inputErrorModalEl = document.getElementById("input-error-modal");
 const dataNotFoundModalEl = document.getElementById("data-not-found-modal");
 const cannotConnectModalEl = document.getElementById("cannot-connect-modal");
+let currentSearch = "";
 
 // An array of different apiKeys that will work in the fetch api call in the getSpoonApi function
 var arrApiKeys = [
@@ -40,8 +41,10 @@ var getSpoonApi = function (event) {
   };
 
   // Converts the user's input into a value the apiUrl will be able to read
+
   var userText = document.querySelector(".input");
   var input = userText.value.trim();
+  currentSearch = input;
 
   if (input === undefined || input === "") {
     inputErrorModalEl.classList.add("is-active");
@@ -109,16 +112,10 @@ var displayRecipeCards = function (data) {
   resultsTextHeader.attr("class", "results-text-header");
   resultsTextHeader.text(
     'Here are some recipes we found based off of your search for:  "' +
-      data.query +
-      '"'
+      currentSearch +
+      '." Click the recipe image to see full recipe details.'
   );
   boxDisplayEl.append(resultsTextHeader);
-
-  var moreResultsButton = $("<button></button>");
-  moreResultsButton.attr("class", "more-results-button button");
-  moreResultsButton.attr("id", "more-results");
-  moreResultsButton.text("Display Different Recipes");
-  boxDisplayEl.append(moreResultsButton);
 
   recipeContainerEl = $("<div></div");
   recipeContainerEl.attr(
@@ -136,7 +133,7 @@ var displayRecipeCards = function (data) {
     recipeCardEl = $("<div></div");
     recipeCardEl.attr(
       "class",
-      "card column is-10-mobile mx-auto is-5-tablet is-2-desktop recipe-card my-4"
+      "card column is-10-mobile mx-auto is-5-tablet is-4-desktop is-2-widescreen recipe-card my-4"
     );
     recipeCardEl.attr("id", data.results[i].id);
     recipeContainerEl.append(recipeCardEl);
@@ -265,7 +262,10 @@ var checkID = function (data) {
             " min" +
             "<br>" +
             "Servings: " +
-            data.servings
+            data.servings +
+            "<br>" +
+            "Source: " +
+            data.sourceName
         );
     } else {
     }

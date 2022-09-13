@@ -137,6 +137,7 @@ body {
 }
 .checkbox {
     padding: 5px;
+    padding-left: 0;
 }
 
 /*.recipe-card {
@@ -165,6 +166,10 @@ body {
 .drink-title {
    background-color: white;
    border-radius: 5px;
+}
+
+#drink-choice {
+    margin-left: 5px;
 }
 
 .ingredients-column {
