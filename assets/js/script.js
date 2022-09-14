@@ -125,8 +125,8 @@ var displayRecipeCards = function (data) {
   resultsTextHeader.attr("class", "results-text-header");
   resultsTextHeader.text(
     'Here are some recipes we found based off of your search for:  "' +
-      currentSearch +
-      '." Click the recipe image to see full recipe details.'
+    currentSearch +
+    '." Click the recipe image to see full recipe details.'
   );
   boxDisplayEl.append(resultsTextHeader);
 
@@ -140,6 +140,7 @@ var displayRecipeCards = function (data) {
   function randomKey(arrApiKeys) {
     return arrApiKeys[Math.floor(Math.random() * arrApiKeys.length)];
   }
+
 
   // for loop to create cards
   for (i = 0; i < 5; i++) {
@@ -192,14 +193,14 @@ var displayRecipeCards = function (data) {
     cardContentEl.attr("class", "content");
     cardContentEl.html(
       "Ready in " +
-        data.results[i].readyInMinutes +
-        " min" +
-        "<br>" +
-        "Servings: " +
-        data.results[i].servings +
-        "<br>" +
-        "Source: " +
-        data.results[i].sourceName
+      data.results[i].readyInMinutes +
+      " min" +
+      "<br>" +
+      "Servings: " +
+      data.results[i].servings +
+      "<br>" +
+      "Source: " +
+      data.results[i].sourceName
     );
     cardBodyEl.append(cardContentEl);
     cardContainerEl.append(recipeContainerEl);
@@ -230,6 +231,76 @@ var displayRecipeCards = function (data) {
 
   checkDrinks();
 };
+
+
+$(document).ready(function() {
+  $('.button').click(function() {
+     $( ".button" ).effect( "pulsate", {
+        times: 3,
+        distance: 10
+     }, 3000)
+  });
+});
+
+//uses array of options to provide autocomplete options
+$(function () {
+  var dataSrc = [
+    "apples",
+    "avacado",
+    "almond",
+    "bacon",
+    "bagel",
+    "broccoli",
+    "cabbage", 
+    "chicken", 
+    "cookies",
+    "duck",
+    "donuts",
+    "dumplings",
+    "eggs",
+    "eel",
+    "enchilada",
+    "fish",
+    "fajita",
+    "franks",
+    "garlic",
+    "gumbo",
+    "grits",
+    "ham",
+    "hash browns",
+    "hot dogs",
+    "ice cream",
+    "indian food",
+    "irish stew",
+    "jambalaya",
+    "jelly",
+    "jalapeno",
+    "kale",
+    "kiwi",
+    "kidney beans",
+    "lobster",
+    "lamb",
+    "lasagna",
+    "meatballs",
+    "milk",
+    "noodles",
+    "pizza",
+    "pancakes",
+    "pepperoni",
+    "quesadilla",
+    "spinach",
+    "toast",
+    "venison",
+    "waffles",
+    "walnuts",
+    "yogurt",
+    "ziti"
+  ];
+
+  $("#search-input").autocomplete({
+      source:dataSrc
+  });
+});
 
 var updateCardText = function (idCallResponse) {
   currentCard = $("cards").find($);
@@ -570,6 +641,13 @@ var displayDrinks = function (data) {
   instructionsSummaryEl.attr("class", "instructions-summary");
   instructionsSummaryEl.text(data.drinks[0].strInstructions);
   instructionsEl.append(instructionsSummaryEl);
+  
+  // Getter
+  // var themeClass = $( ".drink-column" ).tooltip( "option", "classes.ui-tooltip" );
+   
+  // Setter
+  // $( ".drink-column" ).tooltip( "option", "classes.ui-tooltip", "content", "highlight" );
+  
 };
 
 var closeInputModal = function () {
