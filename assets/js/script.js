@@ -300,6 +300,14 @@ $(function () {
       minLength: 3,
       source:dataSrc
   });
+
+  // Lines 307 - 312 came https://miroslavpopovic.com/posts/2012/06/jqueryui-autocomplete-filter-words-starting-with-term
+  $.ui.autocomplete.filter = function (array, term) {
+    var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(term), "i");
+    return $.grep(array, function (value) {
+      return matcher.test(value.label || value.value || value);
+    });
+  };
 });
 
 var updateCardText = function (idCallResponse) {
