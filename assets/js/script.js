@@ -271,8 +271,10 @@ var getDrinks = function () {
 var displayDrinks = function (data) {
   console.log("DRINKS", data);
 
+  // Empties any content in the drink section so that the user can search for something and there won't be duplicate elements in the section.
   $("#drink").empty();
 
+  // Removes the hidden class in the drink section so that is visible again. Without this the section background is visible on mobile screens
   $("#drink-section").removeClass("hidden");
 
   drinkContainerEl.attr(

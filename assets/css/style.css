@@ -227,6 +227,7 @@ body {
 }
 
 @media screen and (max-width: 560px) {
+
     .drink-section {
         display: flex;
         justify-content: space-evenly;
