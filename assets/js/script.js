@@ -24,17 +24,6 @@ var arrApiKeys = [
   "d47220e0ade34b3ea9c039613858c695",
 ];
 
-// All Api Keys
-// var arrApiKeys = [
-//   "c39f000be15b48f0b51fc4215771d97b",
-//   "ad6278e15c864117bf13998d6f2409e0",
-//   "d4e89512419b4ecfae9d762561d78c97",
-//   "2cb1ecb32f4e4eb9a46acc15da086c22",
-//   "abed78e3630b46feafb9672300be48cc",
-//   "fe6c2d84686842f9af715566ad95611d",
-//   "d47220e0ade34b3ea9c039613858c695"
-// ];
-
 var getSpoonApi = function (event) {
   event.preventDefault();
 
@@ -65,7 +54,6 @@ var getSpoonApi = function (event) {
   var dietParameter = "&diet=";
 
   if (document.getElementById("veggie-option").checked === true) {
-    console.log(input);
     dietParameter = dietParameter + "vegetarian";
   }
 
@@ -93,9 +81,6 @@ var getSpoonApi = function (event) {
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          console.log(data);
-          console.log(apiUrl);
-
           if (data.results.length === 0) {
             inputNoRecipesModalEl.classList.add("is-active");
             $("#search-input").val("");
@@ -220,10 +205,6 @@ var displayRecipeCards = function (data) {
     cardFavoriteButton.attr("class", "favorite card-footer-item button");
     cardFavoriteButton.text("Favorite");
     cardButtonEl.append(cardFavoriteButton);
-
-    cardButtonIcon = $("<i></i>");
-    cardButtonIcon.attr("class", "fa-regular fa-star");
-    cardFavoriteButton.append(cardButtonIcon);
   }
 
   //drag recipe cards
@@ -238,7 +219,7 @@ var displayRecipeCards = function (data) {
 
 $(document).ready(function () {
   $(".button").click(function () {
-    $(".button").effect(
+    $(".submit").effect(
       "pulsate",
       {
         times: 3,
@@ -332,15 +313,12 @@ var checkDrinks = function () {
 };
 
 var getDrinks = function () {
-  console.log("Drinks");
-
   var apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
 
   fetch(apiUrl)
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          console.log(data);
           displayDrinks(data);
         });
       } else {
@@ -355,8 +333,6 @@ var getDrinks = function () {
 };
 
 var displayDrinks = function (data) {
-  console.log("DRINKS", data);
-
   // Empties any content in the drink section so that the user can search for something and there won't be duplicate elements in the section.
   $("#drink").empty();
 
@@ -664,6 +640,73 @@ var displayDrinks = function (data) {
   // $( ".drink-column" ).tooltip( "option", "classes.ui-tooltip", "content", "highlight" );
 };
 
+var favButton = function (event) {
+  var target = $(event.target);
+  if (target.is("button.favorite")) {
+    var targetCardTitle = target.parent().parent().find("h1").text();
+    var targetCardUrl = target.parent().parent().find("a").attr("href");
+
+    var storedRecipe = {
+      title: targetCardTitle,
+      url: targetCardUrl,
+    };
+
+    // check to see if this recipe already exists in the saved recipes array, if so, do not add another button, if not, add button
+    if (favArray.some((arrObj) => arrObj.title == storedRecipe.title)) {
+      return;
+    } else {
+      favArray.push(storedRecipe);
+      saveRecipes();
+      createFavRecipeButton(storedRecipe);
+    }
+  }
+};
+
+var createFavRecipeButton = function (storedRecipe) {
+  newAnchor = $("<a>");
+  newAnchor.attr("href", storedRecipe.url);
+  newAnchor.attr("target", "_blank");
+
+  newButton = $("<button></button>");
+  newButton.attr(
+    "class",
+    "button is-fullwidth is-responsive my-2 saved-fav mx-auto"
+  );
+  newButton.text(storedRecipe.title);
+  newAnchor.append(newButton);
+
+  favSection.append(newAnchor);
+};
+
+var loadFavRecipes = function () {
+  savedFavRecipes = localStorage.getItem("recipes");
+  savedFavRecipes = JSON.parse(savedFavRecipes);
+  favArray = savedFavRecipes;
+
+  if (favArray === null) {
+    favArray = [];
+  }
+
+  for (i = 0; i < favArray.length; i++) {
+    newAnchor = $("<a>");
+    newAnchor.attr("href", savedFavRecipes[i].url);
+    newAnchor.attr("target", "_blank");
+
+    newButton = $("<button></button>");
+    newButton.attr(
+      "class",
+      "button is-fullwidth is-responsive my-2 saved-fav mx-auto"
+    );
+    newButton.text(savedFavRecipes[i].title);
+    newAnchor.append(newButton);
+
+    favSection.append(newAnchor);
+  }
+};
+
+var saveRecipes = function () {
+  localStorage.setItem("recipes", JSON.stringify(favArray));
+};
 var closeInputModal = function () {
   inputErrorModalEl.classList.remove("is-active");
 };
@@ -678,41 +721,6 @@ var closeDataModal = function () {
 
 var closeApiModal = function () {
   cannotConnectModalEl.classList.remove("is-active");
-};
-
-var favButton = function (event) {
-  var target = $(event.target);
-  if (target.is("button.favorite")) {
-    var targetCardTitle = target.parent().parent().find("h1").text();
-    console.log(targetCardTitle);
-    var targetCardUrl = target.parent().parent().find("a").attr("href");
-    console.log(targetCardUrl);
-
-    var storedRecipe = {
-      title: targetCardTitle,
-      url: targetCardUrl,
-    };
-    favArray.push(storedRecipe);
-    saveRecipes();
-    createFavRecipeButton(storedRecipe);
-  }
-};
-
-var createFavRecipeButton = function (storedRecipe) {
-  newAnchor = $("<a>");
-  newAnchor.attr("href", storedRecipe.url);
-  newAnchor.attr("target", "_blank");
-
-  newButton = $("<button></button>");
-  newButton.attr("class", "button is-fullwidth my-2 saved-fav");
-  newButton.text(storedRecipe.title);
-  newAnchor.append(newButton);
-
-  favSection.append(newAnchor);
-};
-
-var saveRecipes = function () {
-  localStorage.setItem("recipes", JSON.stringify(favArray));
 };
 
 document
@@ -741,3 +749,4 @@ document
 
 $("#form-submit").on("click", getSpoonApi);
 $(favButton).on("click", favButton);
+loadFavRecipes();
