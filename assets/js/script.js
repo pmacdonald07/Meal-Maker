@@ -586,14 +586,11 @@ var closeApiModal = function () {
 };
 
 var favButton = function (event) {
-  if (event.target === favButton) {
-    var targetCardTitle = $(event.target).parent().parent().find("h1").text();
+  var target = $(event.target);
+  if (target.is("button.favorite")) {
+    var targetCardTitle = target.parent().parent().find("h1").text();
     console.log(targetCardTitle);
-    var targetCardUrl = $(event.target)
-      .parent()
-      .parent()
-      .find("a")
-      .attr("href");
+    var targetCardUrl = target.parent().parent().find("a").attr("href");
     console.log(targetCardUrl);
 
     var storedRecipe = {
@@ -612,7 +609,7 @@ var createFavRecipeButton = function (storedRecipe) {
   newAnchor.attr("target", "_blank");
 
   newButton = $("<button></button>");
-  newButton.attr("class", "button");
+  newButton.attr("class", "button is-fullwidth my-2 saved-fav");
   newButton.text(storedRecipe.title);
   newAnchor.append(newButton);
 
