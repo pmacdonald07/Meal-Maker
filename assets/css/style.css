@@ -148,11 +148,6 @@ body {
     padding-left: 0;
 }
 
-/*.recipe-card {
-    max-width: 300px;
-    max-height: 500px;
-} */
-
 #welcome {
     font-family: 'Sacramento', cursive;
     color: red;
@@ -160,6 +155,11 @@ body {
     font-size: 75px;
     font-weight: bolder;
     margin-top: 210px;
+}
+
+/* Prevents the drink section from being visible on mobile when the page is opened*/
+.hidden {
+    visibility: hidden;
 }
 
 .drink-section {
@@ -226,7 +226,7 @@ body {
     color: darkred;
 }
 
-@media screen and (max-width: 542px) {
+@media screen and (max-width: 560px) {
     .drink-section {
         display: flex;
         justify-content: space-evenly;

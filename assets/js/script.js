@@ -34,6 +34,7 @@ var arrApiKeys = [
 
 var getSpoonApi = function (event) {
   event.preventDefault();
+
   const options = {
     method: "GET",
     headers: {
@@ -270,7 +271,9 @@ var getDrinks = function () {
 var displayDrinks = function (data) {
   console.log("DRINKS", data);
 
-  $("#drinks").empty();
+  $("#drink").empty();
+
+  $("#drink-section").removeClass("hidden");
 
   drinkContainerEl.attr(
     "class",
@@ -283,6 +286,7 @@ var displayDrinks = function (data) {
     "class",
     "column recipe-card is-half-mobile mx-small drink-card drink-recipe"
   );
+  recipeCardEl.attr("id", "drink-recipe");
   drinkContainerEl.append(recipeCardEl);
 
   //set card image
@@ -322,6 +326,7 @@ var displayDrinks = function (data) {
   ingredientsEl.append(ingredientsTitleText);
 
   ingredientsListEl = $("<div></div>");
+  ingredientsListEl.attr("class", "ingredients-list");
   ingredientsEl.append(ingredientsListEl);
 
   ingredientsListOrdered = $("<ol></ol>");
@@ -551,6 +556,7 @@ var displayDrinks = function (data) {
 
   // Set Ingredients Column
   instructionsTitleEl = $("<div></div>");
+  instructionsTitleEl.attr("class", "instructions-titleEl");
   instructionsEl.append(instructionsTitleEl);
 
   instructionsTitleText = $("<h1></h1>");
