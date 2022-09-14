@@ -37,6 +37,7 @@ var arrApiKeys = [
 
 var getSpoonApi = function (event) {
   event.preventDefault();
+
   const options = {
     method: "GET",
     headers: {
@@ -235,6 +236,87 @@ var displayRecipeCards = function (data) {
   checkDrinks();
 };
 
+$(document).ready(function () {
+  $(".button").click(function () {
+    $(".button").effect(
+      "pulsate",
+      {
+        times: 3,
+        distance: 10,
+      },
+      3000
+    );
+  });
+});
+
+//uses array of options to provide autocomplete options
+$(function () {
+  var dataSrc = [
+    "apples",
+    "avacado",
+    "almond",
+    "bacon",
+    "bagel",
+    "broccoli",
+    "cabbage",
+    "chicken",
+    "cookies",
+    "duck",
+    "donuts",
+    "dumplings",
+    "eggs",
+    "eel",
+    "enchilada",
+    "fish",
+    "fajita",
+    "franks",
+    "garlic",
+    "gumbo",
+    "grits",
+    "ham",
+    "hash browns",
+    "hot dogs",
+    "ice cream",
+    "indian food",
+    "irish stew",
+    "jambalaya",
+    "jelly",
+    "jalapeno",
+    "kale",
+    "kiwi",
+    "kidney beans",
+    "lobster",
+    "lamb",
+    "lasagna",
+    "meatballs",
+    "milk",
+    "noodles",
+    "pizza",
+    "pancakes",
+    "pepperoni",
+    "quesadilla",
+    "spinach",
+    "toast",
+    "venison",
+    "waffles",
+    "walnuts",
+    "yogurt",
+    "ziti",
+  ];
+
+  $("#search-input").autocomplete({
+    source: dataSrc,
+  });
+
+  // Lines 307 - 312 came from https://miroslavpopovic.com/posts/2012/06/jqueryui-autocomplete-filter-words-starting-with-term
+  $.ui.autocomplete.filter = function (array, term) {
+    var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(term), "i");
+    return $.grep(array, function (value) {
+      return matcher.test(value.label || value.value || value);
+    });
+  };
+});
+
 var updateCardText = function (idCallResponse) {
   currentCard = $("cards").find($);
   cardContentEl.text(idCallResponse.readyInMinutes);
@@ -275,7 +357,11 @@ var getDrinks = function () {
 var displayDrinks = function (data) {
   console.log("DRINKS", data);
 
-  $("#drinks").empty();
+  // Empties any content in the drink section so that the user can search for something and there won't be duplicate elements in the section.
+  $("#drink").empty();
+
+  // Removes the hidden class in the drink section so that is visible again. Without this the section background is visible on mobile screens
+  $("#drink-section").removeClass("hidden");
 
   drinkContainerEl.attr(
     "class",
@@ -288,6 +374,7 @@ var displayDrinks = function (data) {
     "class",
     "column recipe-card is-half-mobile mx-small drink-card drink-recipe"
   );
+  recipeCardEl.attr("id", "drink-recipe");
   drinkContainerEl.append(recipeCardEl);
 
   //set card image
@@ -327,6 +414,7 @@ var displayDrinks = function (data) {
   ingredientsEl.append(ingredientsTitleText);
 
   ingredientsListEl = $("<div></div>");
+  ingredientsListEl.attr("class", "ingredients-list");
   ingredientsEl.append(ingredientsListEl);
 
   ingredientsListOrdered = $("<ol></ol>");
@@ -556,6 +644,7 @@ var displayDrinks = function (data) {
 
   // Set Ingredients Column
   instructionsTitleEl = $("<div></div>");
+  instructionsTitleEl.attr("class", "instructions-titleEl");
   instructionsEl.append(instructionsTitleEl);
 
   instructionsTitleText = $("<h1></h1>");
@@ -567,6 +656,12 @@ var displayDrinks = function (data) {
   instructionsSummaryEl.attr("class", "instructions-summary");
   instructionsSummaryEl.text(data.drinks[0].strInstructions);
   instructionsEl.append(instructionsSummaryEl);
+
+  // Getter
+  // var themeClass = $( ".drink-column" ).tooltip( "option", "classes.ui-tooltip" );
+
+  // Setter
+  // $( ".drink-column" ).tooltip( "option", "classes.ui-tooltip", "content", "highlight" );
 };
 
 var closeInputModal = function () {
