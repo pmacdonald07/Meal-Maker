@@ -8,6 +8,7 @@ var favSection = $("#favorites-section");
 var favArray = [];
 
 const inputErrorModalEl = document.getElementById("input-error-modal");
+const inputNoRecipesModalEl = document.getElementById("input-no-recipes-modal");
 const dataNotFoundModalEl = document.getElementById("data-not-found-modal");
 const cannotConnectModalEl = document.getElementById("cannot-connect-modal");
 let currentSearch = "";
@@ -75,6 +76,10 @@ var getSpoonApi = function (event) {
     dietParameter = dietParameter + "gluten free";
   }
 
+  if (document.getElementById("no-diet").checked === true) {
+    dietParameter = dietParameter;
+  }
+
   var apiUrl =
     "https://api.spoonacular.com/recipes/complexSearch?query=" +
     input +
@@ -89,6 +94,13 @@ var getSpoonApi = function (event) {
         response.json().then(function (data) {
           console.log(data);
           console.log(apiUrl);
+
+          if (data.results.length === 0) {
+            inputNoRecipesModalEl.classList.add("is-active");
+            $("#search-input").val("");
+            return;
+          }
+
           displayRecipeCards(data);
         });
       } else {
@@ -263,7 +275,8 @@ var getDrinks = function () {
 var displayDrinks = function (data) {
   console.log("DRINKS", data);
 
-  $("#drink").text("");
+  $("#drinks").empty();
+
   drinkContainerEl.attr(
     "class",
     "drink-section box is-flex is-flex-wrap-wrap drink-column columns container"
@@ -304,6 +317,7 @@ var displayDrinks = function (data) {
 
   // Set Ingredients Column
   var ingredientsEl = $("#ingredients");
+  ingredientsEl.empty();
   ingredientsEl.attr("class", "column ingredients-column");
   drinkContainerEl.append(ingredientsEl);
 
@@ -536,6 +550,7 @@ var displayDrinks = function (data) {
 
   // If the ingredient value in the data has a value then create a list element for that unique ingredient
   var instructionsEl = $("#instructions");
+  instructionsEl.empty();
   instructionsEl.attr("class", "column instructions-column");
   drinkContainerEl.append(instructionsEl);
 
@@ -556,6 +571,10 @@ var displayDrinks = function (data) {
 
 var closeInputModal = function () {
   inputErrorModalEl.classList.remove("is-active");
+};
+
+var noData = function () {
+  inputNoRecipesModalEl.classList.remove("is-active");
 };
 
 var closeDataModal = function () {
@@ -607,6 +626,9 @@ var saveRecipes = function () {
 document
   .querySelector("#input-modal-close-btn")
   .addEventListener("click", closeInputModal);
+document
+  .querySelector("#input-modal-close-btn-2")
+  .addEventListener("click", noData);
 document
   .querySelector("#input-modal-bg")
   .addEventListener("click", closeInputModal);
