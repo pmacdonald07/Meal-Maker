@@ -12,9 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Sacramento&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Noto+Serif:wght@700&family=Sacramento&display=swap" rel="stylesheet">
+    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css"/>
     <title>MealMaker</title>
 </head>
@@ -30,7 +28,7 @@
                     <div class="field">
                         <label class="meal">What kind of meal would you like?</label>
                         <div class="control">
-                            <input class="input" type="text" placeholder="Text input" id="search-input">
+                            <input class="input" type="text" placeholder="Ex: Apple Crumble, Cheese, Pasta, etc..." id="search-input">
                         </div>
                     </div>
                     <div class="field">
@@ -41,34 +39,39 @@
                             <br>
                             Diet Options:
                             <br>
-                            <label class="radio">
+                            <label class="radio pl-3">
                                 <input type="radio" name="diet" id="veggie-option">
                                 Vegetarian
                             </label>
                             <br>
-                            <label class="radio">
+                            <label class="radio pl-3">
                                 <input type="radio" name="diet" id="vegan-option">
                                 Vegan
                             </label>
                             <br>
-                            <label class="radio">
+                            <label class="radio pl-3">
                                 <input type="radio" name="diet" id="gluten-free-option">
                                 Gluten-free
                             </label>
                             <br>
-                            <label class="radio">
+                            <label class="radio pl-3">
                                 <input type="radio" name="diet" id="no-diet">
-                                No Diet
+                                No Restrictions
                             </label>
                             <br>
-                            <button class="button submit is-full" id="form-submit">Submit</button>
+                            <button class="button submit is-fullwidth is-responsive" id="form-submit">Submit</button>
                         </div>
                 </form>
                 </div>
             </div>
 
+<<<<<<< HEAD
             <div class="favorites-section  fav-recipe-box box">
                 <section class="favorites">
+=======
+            <div class="favorites-section is-block fav-recipe-box box is-light is-fluid">
+                <section class="favorites" id="favorites-section">
+>>>>>>> main
                     <div>
                         <h1 class="fav-recipe-header"  id="fav">Favorite Recipes</h1>
                     </div>
@@ -77,16 +80,19 @@
                 </section>
             </div>
         </div>
+<<<<<<< HEAD
         <div class="column is-three-quarters-tablet" id="cards">
         </div>
+=======
+        <section class="column is-three-quarters-tablet" id="cards">
+        </section>  
+>>>>>>> main
     </main>
-    <section id="drink-info" class="drink-section">
-        <div>
-            <div class="drink-section columns is-three-quarters-tablet">
+    <section id="drink-section" class="hidden">
+            <div id="drink-info" class="drink-section columns is-three-quarters-tablet">
                 <div class="column" id="drink"></div>
                 <div class="column" id="ingredients"></div>
                 <div class="column" id="instructions"></div>
-            </div>
         </div>
     </section>
 
