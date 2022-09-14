@@ -125,8 +125,8 @@ var displayRecipeCards = function (data) {
   resultsTextHeader.attr("class", "results-text-header");
   resultsTextHeader.text(
     'Here are some recipes we found based off of your search for:  "' +
-    currentSearch +
-    '." Click the recipe image to see full recipe details.'
+      currentSearch +
+      '." Click the recipe image to see full recipe details.'
   );
   boxDisplayEl.append(resultsTextHeader);
 
@@ -140,7 +140,6 @@ var displayRecipeCards = function (data) {
   function randomKey(arrApiKeys) {
     return arrApiKeys[Math.floor(Math.random() * arrApiKeys.length)];
   }
-
 
   // for loop to create cards
   for (i = 0; i < 5; i++) {
@@ -193,14 +192,14 @@ var displayRecipeCards = function (data) {
     cardContentEl.attr("class", "content");
     cardContentEl.html(
       "Ready in " +
-      data.results[i].readyInMinutes +
-      " min" +
-      "<br>" +
-      "Servings: " +
-      data.results[i].servings +
-      "<br>" +
-      "Source: " +
-      data.results[i].sourceName
+        data.results[i].readyInMinutes +
+        " min" +
+        "<br>" +
+        "Servings: " +
+        data.results[i].servings +
+        "<br>" +
+        "Source: " +
+        data.results[i].sourceName
     );
     cardBodyEl.append(cardContentEl);
     cardContainerEl.append(recipeContainerEl);
@@ -232,13 +231,16 @@ var displayRecipeCards = function (data) {
   checkDrinks();
 };
 
-
-$(document).ready(function() {
-  $('.button').click(function() {
-     $( ".button" ).effect( "pulsate", {
+$(document).ready(function () {
+  $(".button").click(function () {
+    $(".button").effect(
+      "pulsate",
+      {
         times: 3,
-        distance: 10
-     }, 3000)
+        distance: 10,
+      },
+      3000
+    );
   });
 });
 
@@ -251,8 +253,8 @@ $(function () {
     "bacon",
     "bagel",
     "broccoli",
-    "cabbage", 
-    "chicken", 
+    "cabbage",
+    "chicken",
     "cookies",
     "duck",
     "donuts",
@@ -294,13 +296,21 @@ $(function () {
     "waffles",
     "walnuts",
     "yogurt",
-    "ziti"
+    "ziti",
   ];
 
   $("#search-input").autocomplete({
-      source:dataSrc
+    source: dataSrc,
   });
-});
+
+  // Lines 307 - 312 came https://miroslavpopovic.com/posts/2012/06/jqueryui-autocomplete-filter-words-starting-with-term
+  $.ui.autocomplete.filter = function (array, term) {
+    var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(term), "i");
+    return $.grep(array, function (value) {
+      return matcher.test(value.label || value.value || value);
+    });
+  };
+})();
 
 var updateCardText = function (idCallResponse) {
   currentCard = $("cards").find($);
@@ -641,13 +651,12 @@ var displayDrinks = function (data) {
   instructionsSummaryEl.attr("class", "instructions-summary");
   instructionsSummaryEl.text(data.drinks[0].strInstructions);
   instructionsEl.append(instructionsSummaryEl);
-  
+
   // Getter
   // var themeClass = $( ".drink-column" ).tooltip( "option", "classes.ui-tooltip" );
-   
+
   // Setter
   // $( ".drink-column" ).tooltip( "option", "classes.ui-tooltip", "content", "highlight" );
-  
 };
 
 var closeInputModal = function () {
