@@ -635,10 +635,10 @@ var displayDrinks = function (data) {
   instructionsSummaryEl.text(data.drinks[0].strInstructions);
   instructionsEl.append(instructionsSummaryEl);
   
-  // // Getter
+  // Getter
   // var themeClass = $( ".drink-column" ).tooltip( "option", "classes.ui-tooltip" );
    
-  // // Setter
+  // Setter
   // $( ".drink-column" ).tooltip( "option", "classes.ui-tooltip", "content", "highlight" );
   
 };
