@@ -297,6 +297,7 @@ $(function () {
   ];
 
   $("#search-input").autocomplete({
+      minLength: 3,
       source:dataSrc
   });
 });
@@ -634,11 +635,11 @@ var displayDrinks = function (data) {
   instructionsSummaryEl.text(data.drinks[0].strInstructions);
   instructionsEl.append(instructionsSummaryEl);
   
-  // Getter
-  var themeClass = $( ".drink-column" ).tooltip( "option", "classes.ui-tooltip" );
+  // // Getter
+  // var themeClass = $( ".drink-column" ).tooltip( "option", "classes.ui-tooltip" );
    
-  // Setter
-  $( ".drink-column" ).tooltip( "option", "classes.ui-tooltip", "content", "highlight" );
+  // // Setter
+  // $( ".drink-column" ).tooltip( "option", "classes.ui-tooltip", "content", "highlight" );
   
 };
 
